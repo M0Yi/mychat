@@ -1,0 +1,34 @@
+<template>
+	<div>
+		 {{i18n.test}}
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				pageState: false
+			}
+		},
+		methods: {
+			
+		},
+		created() {
+			this.pageState = true;
+		},
+		onLoad() {
+			
+		},
+		computed: {
+			// 初始化多语言
+			i18n() {
+				return this.$t('app')
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>

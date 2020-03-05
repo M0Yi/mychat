@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/app",
+    "pages/index/chat",
+    "pages/index/add"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarBackgroundColor": "#0081ff",
+    "navigationBarTitleText": "ColorUi for UniApp",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "my-button": "/colorui/components/my-button",
+    "my-input": "/colorui/components/my-input",
+    "my-message": "/colorui/components/my-message",
+    "my-bar": "/colorui/components/my-bar"
+  }
+}
