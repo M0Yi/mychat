@@ -2,7 +2,11 @@
 function get(key,sync = true) {
     try {
 		if(sync){
-			return uni.getStorageSync(key);
+			let data = uni.getStorageSync(key);
+			if(data.data && data.type == 'object'){
+				return data.data
+			}
+			return data
 		}else{
 			let data = '';
 			uni.getStorage({

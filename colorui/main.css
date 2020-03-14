@@ -880,7 +880,7 @@ button.cuIcon.lg {
 	text-align: center;
 	justify-content: center;
 	align-items: center;
-	background-color: #ccc;
+	/* background-color: #ccc; */
 	color: #ffffff;
 	white-space: nowrap;
 	position: relative;
@@ -1179,10 +1179,10 @@ button.cuIcon.lg {
 	margin-top: 30upx
 }
 
-.cu-list>.cu-item {
-	/* transition: all .6s ease-in-out 0s; */
-	/* transform: translateX(0upx) */
-}
+/* .cu-list>.cu-item {
+	transition: all .6s ease-in-out 0s;
+	transform: translateX(0upx)
+} */
 
 .cu-list>.cu-item.move-cur {
 	transform: translateX(-260upx)
@@ -1213,7 +1213,7 @@ button.cuIcon.lg {
 	display: flex;
 	padding-right: 10upx;
 	height: 140upx;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	justify-content: flex-end;
 	align-items: center
 }
@@ -1299,7 +1299,7 @@ button.cuIcon.lg {
 	box-sizing: border-box;
 	width: 200%;
 	height: 200%;
-	border-bottom: 1upx solid #ddd;
+	/* border-bottom: 1upx solid #ddd; */
 	border-radius: inherit;
 	content: " ";
 	transform: scale(.5);
@@ -1825,7 +1825,7 @@ button.cuIcon.lg {
 
 .cu-bar.input {
 	padding-right: 20upx;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 }
 
 .cu-bar.input input {
@@ -2167,10 +2167,10 @@ button.cuIcon.lg {
 	margin: 20upx auto;
 	font-size: 24upx;
 	padding: 8upx 12upx;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.2);
 	border-radius: 6upx;
 	color: #ffffff;
-	max-width: 400upx;
+	max-width: 450rpx;
 	line-height: 1.4;
 }
 
@@ -2423,7 +2423,7 @@ button.cuIcon.lg {
 	backface-visibility: hidden;
 	perspective: 2000upx;
 	background: rgba(0, 0, 0, 0.6);
-	/* transition: all 0.3s ease-in-out 0s; */
+	transition: all 0.3s ease-in-out 0s;
 	pointer-events: none;
 }
 
@@ -2436,7 +2436,7 @@ button.cuIcon.lg {
 
 .cu-modal.show {
 	opacity: 1;
-	/* transition-duration: 0.3s; */
+	transition-duration: 0.3s;
 	-ms-transform: scale(1);
 	transform: scale(1);
 	overflow-x: hidden;

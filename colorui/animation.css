@@ -57,6 +57,11 @@
     animation-direction: reverse
 }
 
+
+
+
+
+
 @keyframes fade {
     0% {
         opacity: 0

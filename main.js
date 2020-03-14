@@ -1,23 +1,28 @@
 import Vue from 'vue'
 import App from './App'
-import VueI18n from 'vue-i18n'
 
-Vue.use(VueI18n)
+import * as Lang from './common/lang.js'
+import * as Config from './common/config.js'
+
+Vue.prototype.$config = Config;
+Vue.prototype.__ = Lang.__;
+
+
+import my from './pages/my/my.vue'
+Vue.component('my',my)
 
 import * as Db from './common/db.js'
-import * as Config from './common/config.js'
 import * as Api from './common/api.js'
 import * as Common from './common/common.js'
-
-import * as Soccket from './common/socket.js'
-
-Vue.prototype.$soccket = Soccket;
-
+import * as Socket from './common/socket.js'
+import * as Audio from './common/audio.js'
 
 Vue.prototype.$api = Api;
 Vue.prototype.$common = Common;
 Vue.prototype.$db = Db;
-Vue.prototype.$config = Config;
+Vue.prototype.$socket = Socket;
+Vue.prototype.$audio = Audio;
+
 
 
 //	按钮
@@ -35,29 +40,17 @@ Vue.component('myMessage', myMessage)
 //	顶部条
 import myBar from './colorui/components/my-bar.vue'; //button
 Vue.component('myBar',myBar)
-Vue.config.productionTip = false
 
-const i18n = new VueI18n({
-	//初始化语言
-	
-	// #ifdef MP
-	locale: 'zh-CN',
-	// #endif
-	// #ifndef MP
-	locale: localStorage.getItem('locale') || 'en',
-	// #endif
-	messages: {
-		'zh-CN': require('./lang/zh-CN.js').lang,
-		'zh-TW': require('./lang/zh-TW.js').lang,
-		'en': require('./lang/en.js').lang
-	}
-})
-Vue.prototype._i18n = i18n
+Vue.config.productionTip = false
 
 App.mpType = 'app'
 
 const app = new Vue({
-	i18n,
-	...App
+    ...App
 })
 app.$mount()
+
+ 
+
+
+

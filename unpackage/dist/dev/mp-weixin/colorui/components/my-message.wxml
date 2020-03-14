@@ -1,0 +1,1 @@
+<view class="{{[site,'content',hide?'hidden':'']}}"><block wx:for="{{messageList}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><block><view><view class="{{['message mask radius shadow shadow-lg',item.animation,item.bgClass]}}"><text class="msg-text">{{item.content}}</text></view></view></block></block></view>

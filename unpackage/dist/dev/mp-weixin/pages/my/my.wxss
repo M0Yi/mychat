@@ -1,0 +1,49 @@
+
+.myHead {
+	position: relative;
+	padding-bottom: 100rpx;
+}
+.myHead image {
+	position: absolute;
+	bottom: 0;
+}
+.myHead .cu-list .cu-item::after {
+	display: none;
+}
+.cu-list.menu-avatar .cu-item,
+.myHead .cu-list {
+	background-color: transparent;
+}
+.navHead {
+	position: relative;
+	margin: -90rpx 30rpx 0;
+	padding: 30rpx 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	border-radius: 10rpx;
+}
+.cu-list.menu-avatar.card-menu>.cu-item .content {
+	left: 115rpx;
+}
+.cu-avatar-group .cu-avatar.sm {
+	margin-left: -20rpx !important;
+	border: 1rpx solid #FFFFFF !important;
+}
+.myUpShop {
+	background-color: #fee7b3;
+	position: relative;
+	padding: 30rpx 300rpx 30rpx 30rpx;
+	border-radius: 10rpx;
+}
+.myUpShop image {
+	position: absolute;
+	width: 241rpx;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	height: 169rpx;
+}
+

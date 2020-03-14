@@ -20,7 +20,7 @@ const post = (method, data, success = () => {}, complete = () => {}) => {
 		header: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
-			'Accept-Language': localStorage.getItem('locale')?localStorage.getItem('locale'):'en',
+			// 'Accept-Language': localStorage.getItem('locale')?localStorage.getItem('locale'):'en',
 			'token': userToken,
 		},
 		method: 'POST',
@@ -34,9 +34,9 @@ const post = (method, data, success = () => {}, complete = () => {}) => {
 				case 401:
 					db.del("userInfo");
 					console.log('pluse login')
-					uni.reLaunch({
-						url:'/pages/index/index'
-					})
+					// uni.reLaunch({
+					// 	url:'/pages/user/login'
+					// })
 					break;
 				default:
 					uni.showToast({
@@ -68,5 +68,8 @@ export const refreshUser = (data, success, complete) => post('user/refreshUser',
 // 发送登陆验证码
 export const sendLoginCaptcha = (data, success, complete) => post('sms/sendLoginCaptcha', data, success, complete);
 
-// 发送登陆验证码
+// 关系列表
 export const friendsList = (data, success, complete) => post('social/friendsList', data, success, complete);
+
+// 关系列表
+export const getUserInfo = (data, success, complete) => post('social/getUserInfo', data, success, complete);

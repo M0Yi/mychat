@@ -5,8 +5,7 @@
   },
   "setting": {
     "urlCheck": false,
-    "es6": true,
-    "postcss": true
+    "es6": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.9.2",

@@ -1,6 +1,6 @@
 {
     "name" : "ColorUi for UniApp",
-    "appid" : "__UNI__2C026AF",
+    "appid" : "__UNI__083FA8C",
     "description" : "",
     "versionName" : "ColorUi for UniApp 2.1.4",
     "versionCode" : 214,
@@ -40,13 +40,7 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {
-                "ad" : null
-            }
-        },
-        "splashscreen" : {
-            "alwaysShowBeforeRender" : false,
-            "waiting" : false
+            "sdkConfigs" : {}
         }
     },
     /* SDK配置 */
@@ -56,15 +50,11 @@
         "appid" : "wxd28c1e653a98fe11",
         "setting" : {
             "urlCheck" : false,
-            "es6" : true,
-            "postcss" : true
+            "es6" : true
         }
     },
     "h5" : {
         "title" : "ColorUi for UniApp",
-        "domain" : "demo.color-ui.com",
-        "router" : {
-            "mode" : "hash"
-        }
+        "domain" : "demo.color-ui.com"
     }
 }

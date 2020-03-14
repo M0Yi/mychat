@@ -1,0 +1,18 @@
+
+.margin-auto {
+	margin: auto;
+}
+.bg-gradual-gray {
+	background-image: -webkit-linear-gradient(45deg, #555, #333);
+	background-image: linear-gradient(45deg, #555, #333);
+	color: #ffffff;
+}
+.spin {
+	-webkit-animation: cuIcon-spin 2s infinite linear;
+	        animation: cuIcon-spin 2s infinite linear;
+}
+.anim {
+	-webkit-transition: all 0.4s cubic-bezier(.57, .19, .51, .95);
+	transition: all 0.4s cubic-bezier(.57, .19, .51, .95);
+}
+

@@ -1,0 +1,1 @@
+<view><view class="{{['page',$config.bgClass]}}"><image class="slogo-img" src="../../static/slogo.png" mode="widthFix"></image><view class="text-center bg-white slogo"><image class="cu-logo margin" src="{{$config.logo}}" mode="aspectFit"></image><view class="text-gray padding-bottom-xl">{{$root.m0}}</view></view></view></view>

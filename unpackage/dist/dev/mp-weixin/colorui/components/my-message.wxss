@@ -1,0 +1,69 @@
+
+.content {
+	z-index: 99;
+	position: fixed;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	width: 730rpx;
+	text-align: center;
+}
+.top {
+	top: calc(25px + 50px);
+}
+.bottom {
+	bottom: 50rpx;
+}
+.left {
+	text-align: left;
+	top: calc(25px + 50px);
+	margin: 10rpx;
+	/* left: 0; */
+}
+.right {
+	text-align: right;
+	top: calc(25px + 50px);
+	margin: 10rpx;
+	/* left: 0; */
+}
+.message {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	min-width: 250rpx;
+	max-width: 50%;
+	margin: 10rpx;
+	padding: 25rpx 35rpx 25rpx 35rpx;
+	/* Safari for macOS & iOS */
+	-webkit-backdrop-filter: blur(5px);
+	/* Google Chrome */
+	backdrop-filter: blur(5px);
+	/* 设置背景半透明黑色 */
+	/* opacity: 0.5; */
+	/* background: rgba(255, 255, 255, 0.8); */
+	/* visibility: hidden; */
+}
+.msg-text{
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* 	.bg-red {
+	background: #e54d4270;
+}
+
+.bg-white {
+	background: #ffffff70;
+}
+
+.bg-yellow {
+	background: #fbbd0870;
+}
+
+.bg-green {
+	background: #39b54a70;
+} */
+

@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["pages/my/my"],{"06ca":function(t,e,i){},3271:function(t,e,i){"use strict";i.r(e);var n=i("8893"),a=i.n(n);for(var s in n)"default"!==s&&function(t){i.d(e,t,function(){return n[t]})}(s);e["default"]=a.a},"32d6":function(t,e,i){"use strict";i.r(e);var n=i("669b"),a=i("3271");for(var s in a)"default"!==s&&function(t){i.d(e,t,function(){return a[t]})}(s);i("c7b1");var o,u=i("f0c5"),r=Object(u["a"])(a["default"],n["b"],n["c"],!1,null,null,null,!1,n["a"],o);e["default"]=r.exports},"669b":function(t,e,i){"use strict";var n,a=function(){var t=this,e=t.$createElement;t._self._c},s=[];i.d(e,"b",function(){return a}),i.d(e,"c",function(){return s}),i.d(e,"a",function(){return n})},8893:function(t,e,i){"use strict";(function(t){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var i={data:function(){return{StatusBar:this.StatusBar,CustomBar:this.CustomBar,isLogin:!0,modalName:null,topicList:[{title:"免费领面膜",img:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg",isGet:!0},{title:"免费领眉笔",img:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg",isGet:!1},{title:"免费领手机",img:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg",isGet:!1},{title:"免费领粉底液",img:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg",isGet:!1}],order:[]}},props:{scrollTop:{type:Number,default:0}},methods:{toOrder:function(e){t.navigateTo({url:"/pages/order/list?nav="+e})},showModal:function(t){this.modalName=t.currentTarget.dataset.target},hideModal:function(t){this.modalName=null}}};e.default=i}).call(this,i("543d")["default"])},c7b1:function(t,e,i){"use strict";var n=i("06ca"),a=i.n(n);a.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'pages/my/my-create-component',
+    {
+        'pages/my/my-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("32d6"))
+        })
+    },
+    [['pages/my/my-create-component']]
+]);

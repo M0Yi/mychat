@@ -1,7 +1,9 @@
 import * as db from './db.js' 
+import * as api from './api.js' 
 //引入数据库操作
 import {
-	cdnUrl
+	cdnUrl,
+	avatar,
 } from './config.js'
 
 /**
@@ -81,7 +83,7 @@ function saveUserInfo(data) {
 function addRecord(id,data){
 	let name = 'Record_'+id; 
 	let rec = db.get(name)
-	console.log('addRecord')
+	console.log('新增聊天记录addRecord')
 	if(rec){
 		rec.push(data);
 		db.set('Record_'+id,rec)
@@ -99,6 +101,7 @@ function getRecord(id){
 	console.log('getRecord')
 	let rec = db.get('Record_'+id);
 	if(rec){
+		console.log('recc',rec)
 		return rec;
 	}else{
 		return [];
@@ -110,15 +113,18 @@ function getRecord(id){
  */
 
 function updateRecordState(data){
+	let id = userInfo().id;
 	console.log('updateRecordState',data)
-	let record = db.get('Record_'+data.form);
-	console.log('record',record)
+	let record = db.get('Record_'+data.froms);
+	console.log('record',data)
 	if(record){
+		// 开始查找数据
 		for (var i = record.length - 1; i >= 0; i--){
-			console.log('正在查找',i)
+
 			if(record[i].id == data.id){
+				console.log('找到数据更新完成')
 				record[i].state = data.value
-				db.set('Record_'+data.form,record)
+				db.set('Record_'+data.froms,record)
 				i = 0;
 			}
 		}
@@ -126,17 +132,26 @@ function updateRecordState(data){
 }
 
 function getUserInfo(id){
-	console.log('getUserInfo')
 	let rec = db.get('uid_'+id);
 	if(rec){
 		return rec;
 	}else{
-		return [];
+		let info = userInfo();
+		if(id == info.id){
+			return info
+		}else{
+			api.getUserInfo({id:id},(res)=>{
+				if(res.code){
+					db.set('uid_' + id, res.data);
+					return res.data;
+				}
+			});
+		}
 	}
 }
 
 
-function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体！",type="text",count=1){
+function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体！",type="text",time = new Date().getTime(),count=1){
 	let user = getUserInfo(id);
 	if(user.length==0){
 		return
@@ -145,7 +160,7 @@ function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体
 		count: count,
 		value:value,
 		type:type,
-		time: new Date().getTime()
+		time: time
 	}
 	let list = db.get('NewMessageList');
 	if(list){
@@ -200,8 +215,27 @@ function isRoute(route="/pages/index/index"){
 	}
 }
 	
+function getBase(){
+	// let arr ;
+	return {
+		cdnUrl:cdnUrl,
+		};
+}
 
+function exitLogin(){
+	db.del('userInfo')
+	console.log('尝试关闭socket')
+	
+	uni.onSocketClose((res) => {
+	  console.log('WebSocket 已关闭！');
+	});
+	uni.reLaunch({
+		url:'/pages/user/login'
+	})
+}
 export {
+	exitLogin,
+	getBase,
 	CDN,
 	errorToShow,
 	respond,
