@@ -4,6 +4,7 @@
  */
 
 /* css 滤镜 控制黑白底色gif的 */
+
 .gif-black{  
   mix-blend-mode: screen;  
 }

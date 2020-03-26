@@ -10,7 +10,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
   "appid": "wxd28c1e653a98fe11",
-  "projectname": "ColorUi for UniApp",
+  "projectname": "mychat",
   "condition": {
     "search": {
       "current": -1,

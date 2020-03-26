@@ -1,8 +1,12 @@
 {
   "pages": [
+    "pages/app/index",
+    "pages/app/user/index",
+    "pages/app/feedback",
+    "pages/app/cosmos/index",
+    "pages/test/test",
     "pages/user/login",
     "pages/startup/index",
-    "pages/app/index",
     "pages/app/chat"
   ],
   "subPackages": [],
@@ -13,11 +17,11 @@
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {
-    "my": "/pages/my/my",
+    "cu-custom": "/colorui/components/cu-custom",
     "my-button": "/colorui/components/my-button",
     "my-input": "/colorui/components/my-input",
     "my-message": "/colorui/components/my-message",
-    "my-bar": "/colorui/components/my-bar"
-  },
-  "sitemapLocation": "sitemap38.json"
+    "my-bar": "/colorui/components/my-bar",
+    "preview": "/colorui/components/my-preview"
+  }
 }

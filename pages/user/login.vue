@@ -2,7 +2,7 @@
 	<view>
 		<myMessage ref="myMessage"></myMessage>
 		
-		<view class="bg-gradual-orange login-bg">
+		<view class="bg-gradual-orange moyi-bg-img login-bg">
 			<swiper disable-touch class="list_content" duration="500" :current="indexTab">
 				<swiper-item>
 					<view class="swiper-content text-white">

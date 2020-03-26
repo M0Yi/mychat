@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view :class="isAbs?'abs':''">
 		<view class="cu-custom" :style="[{height:CustomBar + 'px'}]">
 			<view class="cu-bar fixed" :style="style" :class="[bgImage!=''?'none-bg text-white bg-img':'',bgColor]">
 				<view class="action" @tap="BackPage" v-if="isBack">
@@ -45,6 +45,10 @@
 				type: [Boolean, String],
 				default: false
 			},
+			isAbs: {
+				type: [Boolean, String],
+				default: false
+			},
 			bgImage: {
 				type: String,
 				default: ''
@@ -65,5 +69,7 @@
 </script>
 
 <style>
-
+.abs{
+	position: absolute;
+}
 </style>

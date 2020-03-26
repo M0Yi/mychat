@@ -1,5 +1,5 @@
 {
-    "name" : "ColorUi for UniApp",
+    "name" : "mychat",
     "appid" : "__UNI__083FA8C",
     "description" : "",
     "versionName" : "ColorUi for UniApp 2.1.4",
@@ -41,7 +41,9 @@
             "ios" : {},
             /* ios打包配置 */
             "sdkConfigs" : {}
-        }
+        },
+        "compilerVersion" : 3,
+        "nvueLaunchMode" : "fast"
     },
     /* SDK配置 */
     "quickapp" : {},
@@ -54,7 +56,10 @@
         }
     },
     "h5" : {
-        "title" : "ColorUi for UniApp",
-        "domain" : "demo.color-ui.com"
+        "title" : "mychat",
+        "domain" : "api.mymoyi.cn",
+        "router" : {
+            "base" : "/mychat"
+        }
     }
 }

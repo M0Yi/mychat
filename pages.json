@@ -1,6 +1,34 @@
 {
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		{
+			"path": "pages/app/index",
+			"style": {}
+		},
+		{
+			"path": "pages/app/cosmos/push",
+			"style": {}
+		},
+		{
+			"path": "pages/app/user/index",
+			"style": {}
+		},
+		{
+			"path": "pages/app/feedback",
+			"style": {}
+		},
+		{
+			"path": "pages/app/cosmos/index",
+			"style": {}
+		},
+		
+		
+		
+		{
+		    "path" : "pages/test/test",
+		    "style" : {}
+		},
 		{
 			"path": "pages/user/login",
 			"style": {}
@@ -9,15 +37,12 @@
 			"path": "pages/startup/index",
 			"style": {}
 		},
-		{
-			"path": "pages/app/index",
-			"style": {}
-		},
+		
 		{
 			"path": "pages/app/chat",
 			"style": {}
 		}
-	],
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */

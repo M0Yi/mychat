@@ -39,11 +39,11 @@
 		onHide: function() {
 			console.log('App Hide')
 		}
-
 	}
 </script>
 
 <style>
+	@import "colorui/animation.css";
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 	@import "colorui/moyi.css";

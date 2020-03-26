@@ -63,7 +63,7 @@ function CDN(srcUrl) {
  * 用户信息
  * @param {Array} data 用户数据
  */
-function userInfo(data) {
+function userInfo() {
 	return db.get('userInfo'); 
 }
 
@@ -115,16 +115,16 @@ function getRecord(id){
 function updateRecordState(data){
 	let id = userInfo().id;
 	console.log('updateRecordState',data)
-	let record = db.get('Record_'+data.froms);
-	console.log('record',data)
+	let record = db.get('Record_'+data.form);
+	console.log('record',record)
 	if(record){
+		
 		// 开始查找数据
 		for (var i = record.length - 1; i >= 0; i--){
-
 			if(record[i].id == data.id){
 				console.log('找到数据更新完成')
 				record[i].state = data.value
-				db.set('Record_'+data.froms,record)
+				db.set('Record_'+data.form,record)
 				i = 0;
 			}
 		}
@@ -140,10 +140,11 @@ function getUserInfo(id){
 		if(id == info.id){
 			return info
 		}else{
+			return {'id':id};
 			api.getUserInfo({id:id},(res)=>{
 				if(res.code){
 					db.set('uid_' + id, res.data);
-					return res.data;
+					
 				}
 			});
 		}
@@ -151,11 +152,17 @@ function getUserInfo(id){
 }
 
 
+function addUserInfo(arr){
+	// let rec = db.get('uid_'+arr.id);
+	// if(arr.user_id){
+	// 	arr.id = user_id
+	// }
+	db.set('uid_'+arr.id,arr);
+}
+
+
 function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体！",type="text",time = new Date().getTime(),count=1){
 	let user = getUserInfo(id);
-	if(user.length==0){
-		return
-	};
 	let tips = {
 		count: count,
 		value:value,
@@ -245,6 +252,7 @@ export {
 	getRecord,
 	updateRecordState,
 	getUserInfo,
+	addUserInfo,
 	getNewMessageList,
 	addNewMessageList,
 	readNewMessageList,

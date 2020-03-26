@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"colorui/components/my-bar":1,"colorui/components/my-button":1,"colorui/components/my-input":1,"colorui/components/my-message":1,"pages/my/my":1};
+/******/ 		var cssChunks = {"colorui/components/cu-custom":1,"colorui/components/my-bar":1,"colorui/components/my-button":1,"colorui/components/my-input":1,"colorui/components/my-message":1,"colorui/components/my-preview":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"colorui/components/my-bar":"colorui/components/my-bar","colorui/components/my-button":"colorui/components/my-button","colorui/components/my-input":"colorui/components/my-input","colorui/components/my-message":"colorui/components/my-message","pages/my/my":"pages/my/my"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"colorui/components/cu-custom":"colorui/components/cu-custom","colorui/components/my-bar":"colorui/components/my-bar","colorui/components/my-button":"colorui/components/my-button","colorui/components/my-input":"colorui/components/my-input","colorui/components/my-message":"colorui/components/my-message","colorui/components/my-preview":"colorui/components/my-preview"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

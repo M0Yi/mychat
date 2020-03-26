@@ -54,106 +54,102 @@ export default {
 	created() {
 
 	},
-	onLoad(e) {
-		console.log('page.route	',getCurrentPages())
-		let CP = getCurrentPages();
-		console.log('cp',CP.length);
-		
-		if(CP.length == 1 || CP[CP.length-2].route == '/pages/app/index'){
-			console.log('并非当前页面')
-			uni.reLaunch({
-				url:'/pages/app/index'
-			})
+	onLoad() {
+		// console.log('page.route	',getCurrentPages())
+		// let CP = getCurrentPages();
+		// console.log('cp',CP.length);
 
-		}
+		// if(CP.length == 1 || CP[CP.length-2].route == '/pages/app/index'){
+		// 	console.log('并非当前页面')
+		// 	uni.reLaunch({
+		// 		url:'/pages/app/index'
+		// 	})
+		// }
 		// let peges = getCurrentPages();
 		// // let page = ;
 		// console.log('pages[pages.length',getCurrentPages()[getCurrentPages().length]);
-		
+
 		// let pages = getCurrentPages();
 		// let page = pages[pages.length - 1];
-		
-		uni.getSystemInfo({
-			// 获取当前设备的宽高，文档有
-			success: res => {
-				this.windowHeight = res.windowHeight;
-				this.windowWidth = res.windowWidth;
+
+		// this.loadShow = true;
+		let chat = this.$db.get('chat');
+
+
+		console.log('onLoad,chat', chat);
+		if (chat.user_id) {
+			chat.id = chat.user_id;
+		}
+		this.$common.addUserInfo(chat)
+		this.chat = chat
+		this.title = chat.nickname
+
+		//进入页面滚动到底部
+		this.$nextTick(function() {
+			this.scrollTop = 99999;
+		});
+
+		this.record = this.$common.getRecord(chat.id);
+
+		// 注册接受消息监听
+		uni.$on('socketMessage', (res) => {
+			let data = res.data;
+			// console.log('socketMessage',res)
+			switch (res.type) {
+				case 'init':
+					break;
+					// 消息
+				case 'msg':
+					if (data.to == chat.id || data.form == chat.id) {
+						switch (data.type) {
+							case 'text':
+								this.record.push(data);
+								this.goViewId(data.id);
+								break;
+							case 'tips':
+								console.log('监听到提示消息');
+								this.record.push(data);
+								this.goViewId(data.id);
+								break;
+							default:
+								console.log('监听到未标记消息');
+								break;
+						}
+					} else {
+						switch (data.type) {
+							case 'text':
+								let userInfo = this.$common.getUserInfo(data.form);
+								break;
+						}
+					}
+					break;
+					// 答复
+				case 'response':
+					// 监听到答复
+					if (data.to == chat.id || data.form == chat.id) {
+						let record = this.record;
+						for (var i = record.length - 1; i >= 0; i--) {
+							// 查找ID
+							if (record[i].id == data.id) {
+								this.record[i].state = data.value;
+								i = 0;
+							}
+						}
+					}
+					break;
+				default:
+					console.log(res.type + '数据不作处理')
+					break;
 			}
 		});
-		if (e.id) {
-			//进入页面滚动到底部
-			this.$nextTick(function() {
-				this.scrollTop = 99999;
-			});
 
-			this.record = this.$common.getRecord(e.id);
-			this.chat = this.$common.getUserInfo(e.id)
-			if(e.id == this.userInfo.id){
-				this.chat = this.userInfo;
-				
-			}else{
-				this.chat = this.$common.getUserInfo(e.id)
-				
-			}
-
-			// 注册接受消息监听
-			uni.$on('socketMessage', (res) => {
-				let data = res.data;
-				// console.log('socketMessage',res)
-				switch (res.type) {
-					case 'init':
-						break;
-						// 消息
-					case 'msg':
-						if (data.to == e.id || data.form == e.id) {
-							switch (data.type) {
-								case 'text':
-									this.record.push(data);
-									this.goViewId(data.id);
-									break;
-								case 'tips':
-									console.log('监听到提示消息');
-									this.record.push(data);
-									this.goViewId(data.id);
-									break;
-								default:
-									console.log('监听到未标记消息');
-									break;
-							}
-						} else {
-							switch (data.type) {
-								case 'text':
-									let userInfo = this.$common.getUserInfo(data.form);
-									break;
-							}
-						}
-						break;
-						// 答复
-					case 'response':
-						// 监听到答复
-						if (data.to == e.id || data.form == e.id) {
-							let record = this.record;
-							for (var i = record.length - 1; i >= 0; i--) {
-								// 查找ID
-								if (record[i].id == data.id) {
-									this.record[i].state = data.value;
-									i = 0;
-								}
-							}
-						}
-						break;
-					default:
-						console.log(res.type+'数据不作处理')
-						break;
-				}
-			});
-		} else {
-			uni.redirectTo({
-				url: '/pages/app/index',
-			})
-		}
 	},
 	methods: {
+		navigateBack() {
+			uni.navigateBack({
+
+			})
+		},
 		test1() {
 			//进入页面滚动到底部
 			this.$nextTick(function() {
@@ -182,7 +178,7 @@ export default {
 			this.$common.addNewMessageList(this.chat.id, chat.value);
 			this.record.push(chat);
 			this.goViewId(chat.id);
-			console.log('发送数据',chat)
+			console.log('发送数据', chat)
 			uni.sendSocketMessage({
 				data: JSON.stringify(chat)
 			});
@@ -196,7 +192,7 @@ export default {
 		}
 	},
 	// 页面卸载的时候清除当前消息数量
-	onUnload(){
+	onUnload() {
 		this.$common.readNewMessageList(this.chat.id)
 	},
 };

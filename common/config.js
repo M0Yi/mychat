@@ -1,9 +1,15 @@
 // api调用目录
+// export const apiUrl = 'https://api.mymoyi.cn/api/moyichat/'
 export const apiUrl = 'http://modi.com/api/moyichat/'
+
 // cnd域名。没有就填写后端域名
-export const cdnUrl = 'http://cdn-fyx.mymoyi.cn'
+// export const cdnUrl = 'http://modi.com'
+export const cdnUrl = 'https://moyioss.oss-cn-shanghai.aliyuncs.com'
+
 // webSocket
-export const webSocket = 'ws://0.0.0.0:8282/'
+// export const webSocket = 'ws://api.mymoyi.cn:8282/'
+export const webSocket = 'ws://127.0.0.1:8282/'
+
 // 网站标题
 export const title = 'MoYiChat 0.1'
 // 主题样式	背景样式
@@ -20,3 +26,4 @@ export const avatar = cdnUrl + '/assets/img/avatar.png'
 export const pingInterval = 0;
 // 超时时间 超出时间段将重连系统 单位秒
 export const timeout = 30
+

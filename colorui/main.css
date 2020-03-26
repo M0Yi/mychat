@@ -520,7 +520,7 @@ radio.white.checked .uni-radio-input {
 }
 
 .solids::after {
-	border: 8upx solid #eee;
+	border: 8upx solid #8799a3;
 }
 
 .solids-top::after {
@@ -1280,9 +1280,9 @@ button.cuIcon.lg {
 .cu-list.menu>.cu-item {
 	position: relative;
 	display: flex;
-	padding: 0 30upx;
-	min-height: 100upx;
-	background-color: #ffffff;
+	padding: 0 30rpx;
+	min-height: 100rpx;
+	/* background-color: #ffffff; */
 	justify-content: space-between;
 	align-items: center
 }
@@ -2185,7 +2185,7 @@ button.cuIcon.lg {
 
 .cu-card>.cu-item {
 	display: block;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	overflow: hidden;
 	border-radius: 10upx;
 	margin: 30upx;
@@ -2389,8 +2389,8 @@ button.cuIcon.lg {
 	content: "\e6a3";
 	position: absolute;
 	font-size: 34upx;
-	color: #8799a3;
-	line-height: 100upx;
+	color: #999;
+	/* line-height: 100upx; */
 	width: 60upx;
 	text-align: center;
 	top: 0;
@@ -2464,6 +2464,7 @@ button.cuIcon.lg {
 .cu-modal.bottom-modal .cu-dialog {
 	width: 100%;
 	border-radius: 0;
+	border-radius:20rpx 20rpx 0 0;
 }
 
 .cu-modal.bottom-modal {
@@ -2994,6 +2995,13 @@ scroll-view.cu-steps .cu-item {
 	width: 20%;
 }
 
+.grid.col-5>view {
+	width: 20%;
+}
+.grid.col-6>view {
+	width: 16.66%;
+}
+
 /*  -- 内外边距 -- */
 
 .margin-0 {
@@ -3038,6 +3046,13 @@ scroll-view.cu-steps .cu-item {
 
 .margin-top-xl {
 	margin-top: 50upx;
+}
+
+.margin-top-xxl {
+	margin-top: 60upx;
+}
+.margin-top-xxxl {
+	margin-top: 70upx;
 }
 
 .margin-right-xs {
@@ -3470,7 +3485,7 @@ scroll-view.cu-steps .cu-item {
 
 .bg-black {
 	background-color: #333333;
-	color: #ffffff;
+	color: #bbb;
 }
 
 .bg-white {

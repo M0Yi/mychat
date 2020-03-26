@@ -1,22 +1,22 @@
 <template>
-	<view>
-		<view class="cu-bar padding-bottom-sm my-bg-img" :style="'background:url(../../static/bg-img.jpg) fixed;height:'+base.CustomBar+'px'">
-			<view class="bar-top text-white text-xl flex" :style="'background:url(../../static/bg-img.jpg) fixed;'">
-				<navigator open-type="navigateBack" class="bar-icon">
-					<text class="cuIcon-back margin-lr"></text>
-				</navigator>
-				<view class="text-center bar-title shadow">{{chat.nickname}}</view>
-			</view>
-		</view>
+	<view class="moyi-bg-img">
+		<cu-custom bgColor="bg-black" isAbs :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">{{title}}</block>
+		</cu-custom>
+		
+		
+			
 		<scroll-view 
-		:style="'background:url(../../static/bg-img.jpg) fixed;top:' + base.CustomBar + 'px'" 
+		:style="'top:' + base.CustomBar + 'px'" 
 		class="scroll-view"
 		 scroll-y
 		 :scroll-top="scrollTop" 
 		 :scroll-with-animation="scrollAnimation" 
 		 :scroll-into-view="scrollToView"
-		 @scrolltoupper="loadHistory" 
+		
 		 upper-threshold="50">
+		  <!-- @scrolltoupper="loadHistory" -->
 			<view class="cu-chat">
 				<view class="bg-gray cu-info round text-center ">安全提示：如果聊天中涉及在转账及裸聊等请提高警惕，谨防诈骗，发现可疑请立即举报</view>
 			</view>
