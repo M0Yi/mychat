@@ -1,13 +1,110 @@
 {
 	"pages": [
-		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/app/indexs",
+		// 	"style": {
+		// 		"navigationBarTitleText": "首页",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/list/chat",
+		// 	"style": {
+		// 		"navigationBarTitleText": "对话列表",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/list/contacts",
+		// 	"style": {
+		// 		"navigationBarTitleText": "联系人列表",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/cosmos/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "宇宙",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/cosmos/push",
+		// 	"style": {
+		// 		"navigationBarTitleText": "推送",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/cosmos/details",
+		// 	"style": {
+		// 		"navigationBarTitleText": "详情",
+		// 		"backgroundColor":"#1c2024"
+		// 	}
+		// },
+		
 		
 		{
-			"path": "pages/app/index",
-			"style": {}
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "用户详情",
+				"backgroundColor":"#1c2024"
+			}
 		},
 		{
-			"path": "pages/app/cosmos/push",
+			"path": "pages/user/changepwd",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/user/changemobile",
+			"style": {
+				"navigationBarTitleText": "修改手机",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/user/profile",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/user/my",
+			"style": {
+				"navigationBarTitleText": "用户中心",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/cms/index",
+			"style": {
+				"navigationBarTitleText": "单页",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/chat/index",
+			"style": {
+				"navigationBarTitleText": "对话",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		{
+			"path": "pages/user/feedback",
+			"style": {
+				"navigationBarTitleText": "反馈意见",
+				"backgroundColor":"#1c2024"
+			}
+		},
+		
+		
+		
+		{
+			"path": "pages/app/cosmos/list",
 			"style": {}
 		},
 		{
@@ -18,17 +115,7 @@
 			"path": "pages/app/feedback",
 			"style": {}
 		},
-		{
-			"path": "pages/app/cosmos/index",
-			"style": {}
-		},
 		
-		
-		
-		{
-		    "path" : "pages/test/test",
-		    "style" : {}
-		},
 		{
 			"path": "pages/user/login",
 			"style": {}

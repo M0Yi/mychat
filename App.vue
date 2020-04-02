@@ -43,6 +43,8 @@
 </script>
 
 <style>
+	@import "moyiui/style.css";
+	
 	@import "colorui/animation.css";
 	@import "colorui/main.css";
 	@import "colorui/icon.css";

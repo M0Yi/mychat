@@ -4,7 +4,7 @@
   
   *使用ColorUi开发扩展与插件时，请注明基于ColorUi开发 
   
-  （QQ交流群：240787041）
+  （QQ交流群：240787041） 
 */
 
 /* ==================
@@ -908,6 +908,12 @@ button.cuIcon.lg {
 	width: 128upx;
 	height: 128upx;
 	font-size: 2.5em;
+}
+
+.cu-avatar.xxl {
+	width: 168upx;
+	height: 168upx;
+	font-size: 3em;
 }
 
 .cu-avatar .avatar-text {
@@ -1861,7 +1867,7 @@ button.cuIcon.lg {
 }
 
 .cu-custom .cu-bar .content {
-	width: calc(100% - 440upx);
+	/* width: calc(100% - 440upx); */
 }
 
 /* #ifdef MP-ALIPAY */
@@ -2316,7 +2322,7 @@ button.cuIcon.lg {
  ==================== */
 
 .cu-form-group {
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	padding: 1upx 30upx;
 	display: flex;
 	align-items: center;
@@ -2325,7 +2331,7 @@ button.cuIcon.lg {
 }
 
 .cu-form-group+.cu-form-group {
-	border-top: 1upx solid #eee;
+	border-top: 1upx solid #232323;
 }
 
 .cu-form-group .title {
@@ -2340,7 +2346,7 @@ button.cuIcon.lg {
 .cu-form-group input {
 	flex: 1;
 	font-size: 30upx;
-	color: #555;
+	/* color: #555; */
 	padding-right: 20upx;
 }
 

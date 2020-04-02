@@ -98,6 +98,7 @@ function addRecord(id,data){
  */
 
 function getRecord(id){
+	
 	console.log('getRecord')
 	let rec = db.get('Record_'+id);
 	if(rec){
@@ -113,12 +114,24 @@ function getRecord(id){
  */
 
 function updateRecordState(data){
+	console.log('试图更新聊天记录状态')
 	let id = userInfo().id;
 	console.log('updateRecordState',data)
 	let record = db.get('Record_'+data.form);
 	console.log('record',record)
+	
+	if (data.to == chat.id || data.form == chat.id) {
+		let record = this.record;
+		for (var i = record.length - 1; i >= 0; i--) {
+			// 查找ID
+			if (record[i].id == data.id) {
+				this.record[i].state = data.value;
+				i = 0;
+			}
+		}
+	}
+	
 	if(record){
-		
 		// 开始查找数据
 		for (var i = record.length - 1; i >= 0; i--){
 			if(record[i].id == data.id){
@@ -140,13 +153,7 @@ function getUserInfo(id){
 		if(id == info.id){
 			return info
 		}else{
-			return {'id':id};
-			api.getUserInfo({id:id},(res)=>{
-				if(res.code){
-					db.set('uid_' + id, res.data);
-					
-				}
-			});
+			return {'id':0};
 		}
 	}
 }
@@ -163,12 +170,43 @@ function addUserInfo(arr){
 
 function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体！",type="text",time = new Date().getTime(),count=1){
 	let user = getUserInfo(id);
+	console.log('试图添加NewMessageList',user);
 	let tips = {
 		count: count,
 		value:value,
 		type:type,
 		time: time
 	}
+	if(user.id == 0){
+		api.getUserInfo({id:id},(res)=>{
+			if(res.code){
+				db.set('uid_' + id, res.data);
+				addNewmsg(res.data,tips);
+			}
+		});	
+	}else{
+		addNewmsg(user,tips);
+		// if(list){
+		// 	for (var i = list.length - 1; i >= 0; i--){
+		// 		if(user.id == list[i].user.id){
+		// 			tips.count += list[i].tips.count;
+		// 			if(tips.type=='tips'){
+		// 				tips.time = list[i].tips.time;
+		// 			}
+		// 			list.splice(i, 1);
+		// 		}
+		// 	}
+		// 	list.unshift({user:user,tips:tips})
+		// 	db.set('NewMessageList',list);
+		// }else{
+		// 	db.set('NewMessageList',[{user:user,tips:tips}]);
+		// }
+	}
+	
+
+}
+
+function addNewmsg(user,tips){
 	let list = db.get('NewMessageList');
 	if(list){
 		for (var i = list.length - 1; i >= 0; i--){
@@ -186,7 +224,6 @@ function addNewMessageList(id='1',value="消灭人类暴政！世界属于三体
 		db.set('NewMessageList',[{user:user,tips:tips}]);
 	}
 }
-
 
 function getNewMessageList(){
 	console.log('NewMessageList')
@@ -207,6 +244,7 @@ function readNewMessageList(id){
 		}
 		db.set('NewMessageList',list);
 	}
+	uni.$emit('reMessgaeList');
 }
 
 /**
@@ -240,7 +278,73 @@ function exitLogin(){
 		url:'/pages/user/login'
 	})
 }
+function timeToDate(time,t = 0 ){
+	if (time < 9999999999) {
+		time = time * 1000;
+	}
+	var timeDate = new Date(time);
+	var currentTime = new Date();
+	if (currentTime.getYear() == timeDate.getYear()) {
+		if (new Date(time).toDateString() === new Date().toDateString()) {
+			var hours = timeDate.getHours();
+			var minutes = timeDate.getMinutes();
+			if (hours < 10) {
+				hours = '0' + hours;
+			}
+			if (minutes < 10) {
+				minutes = '0' + minutes;
+			}
+			return hours + ':' + minutes;
+		} else if (new Date(time + 86400).toDateString() === new Date().toDateString()) {
+			return '昨天';
+		}
+		return timeDate.getMonth() + 1 + '月' + timeDate.getDate() + '日';
+	}
+	return timeDate.getYear() + '年' + (timeDate.getMonth() + 1) + '月';
+}
+
+
+
+/**
+ * 字符串效验
+ * @param {String} str 字符串
+ * @param {String} model = [number|mobile|name|idcard|] 模式
+ * @example 
+ * testString('17080057443','mobile')
+ */
+
+function testString(str, model = null) {
+	if (typeof(model) == 'number') {
+		if (str.length >= model) {
+			return true
+		}
+	} else {
+		switch (model) {
+			case null:
+				return false
+				break
+			case 'idcard':
+				return RegExp(/^[1-9]\d{5}(19|20)\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/).test(str)
+				break
+			case 'mobile':
+				return RegExp(/^1[0-9]{10}$/).test(str)
+				break
+			case 'name':
+				return RegExp(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/).test(str)
+				break
+			default:
+				return false
+				break
+		}
+	}
+	return false
+}
+
+
+
+
 export {
+	timeToDate,
 	exitLogin,
 	getBase,
 	CDN,
@@ -256,6 +360,7 @@ export {
 	getNewMessageList,
 	addNewMessageList,
 	readNewMessageList,
-	isRoute
+	isRoute,
+	testString
 	
 }

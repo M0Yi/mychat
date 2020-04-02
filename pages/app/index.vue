@@ -42,8 +42,7 @@
 				<scroll-view class="padding-top	cosmos-scroll-view" @touchstart="cosmosMod.touchstart" @touchmove="cosmosMod.touchmove"
 				 :change:prop="cosmosMod.end" :prop="cosmos.propValue" @touchend="cosmosMod.touchend" :data-top="cosmos.scrollTop"
 				 id="cosmos-refresh-container" scroll-y upper-threshold="50">
-					<view id="load-text" class="load-text  anim-text-lePeek text-center text-gray">
-						
+					<view id="load-text" class="load-text  anim-text-lePeek text-center text-gray margin-top-xl padding-top">
 						<text class="anim-text" v-for="(item, index) in base.title" :key="index" :style="'animation-delay:'+ (200+index*100) +'ms;'">{{item}}</text>
 					</view>
 					<view @tap="cosmosOpen(index)" class="cosmos-chat text-grey" v-for="(item, index) in cosmosList" :key="index">
@@ -290,7 +289,7 @@
 <script src="pages/app/index.js">
 </script>
 
-
+<!-- 
 <script module="cosmosMod" lang="wxs">
 	// 起始y的坐标
 	var startY = 0
@@ -430,7 +429,7 @@
 		touchstart: touchstart,
 		touchmove: touchmove,
 	}
-</script>
+</script> -->
 
 <style lang="less">
 	.cosmos-image-item-image {
@@ -502,17 +501,7 @@
 		
 	}
 
-	.tips-msg {
-		position: relative;
-		top: 30%;
-		color: #8799A3;
-		display: grid;
-		text-align: center;
-
-		.icon {
-			font-size: 98rpx;
-		}
-	}
+	
 
 	.nav {
 		.cur {

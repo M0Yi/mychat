@@ -53,6 +53,10 @@
 				type: String,
 				default: ''
 			},
+			bgClass:{
+				type: String,
+				default: ''
+			}
 		},
 		methods: {
 			BackPage() {

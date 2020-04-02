@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"colorui/components/cu-custom":1,"colorui/components/my-bar":1,"colorui/components/my-button":1,"colorui/components/my-input":1,"colorui/components/my-message":1,"colorui/components/my-preview":1};
+/******/ 		var cssChunks = {"colorui/components/cu-custom":1,"colorui/components/my-bar":1,"colorui/components/my-button":1,"colorui/components/my-input":1,"colorui/components/my-message":1,"colorui/components/my-preview":1,"moyiui/components/bottom-menu":1,"moyiui/components/more-modal":1,"moyiui/components/preview-modal":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"colorui/components/cu-custom":"colorui/components/cu-custom","colorui/components/my-bar":"colorui/components/my-bar","colorui/components/my-button":"colorui/components/my-button","colorui/components/my-input":"colorui/components/my-input","colorui/components/my-message":"colorui/components/my-message","colorui/components/my-preview":"colorui/components/my-preview"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"colorui/components/cu-custom":"colorui/components/cu-custom","colorui/components/my-bar":"colorui/components/my-bar","colorui/components/my-button":"colorui/components/my-button","colorui/components/my-input":"colorui/components/my-input","colorui/components/my-message":"colorui/components/my-message","colorui/components/my-preview":"colorui/components/my-preview","moyiui/components/bottom-menu":"moyiui/components/bottom-menu","moyiui/components/more-modal":"moyiui/components/more-modal","moyiui/components/preview-modal":"moyiui/components/preview-modal"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
@@ -129,6 +129,7 @@
 /******/ 				linkTag.onerror = function(event) {
 /******/ 					var request = event && event.target && event.target.src || fullhref;
 /******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + request + ")");
+/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
 /******/ 					err.request = request;
 /******/ 					delete installedCssChunks[chunkId]
 /******/ 					linkTag.parentNode.removeChild(linkTag)

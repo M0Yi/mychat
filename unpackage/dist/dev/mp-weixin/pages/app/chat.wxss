@@ -8,7 +8,7 @@
   bottom: 96rpx;
 }
 .my-bg-img {
-  background-image: url(../../static/img/bg-img.b2c9e8f8.jpg);
+  background-image: url(/static/bg-img.jpg);
   background-attachment: fixed;
 }
 .cu-bar {

@@ -165,6 +165,7 @@ export default {
 			}
 		},
 		send(value, type = 'text') {
+			console.log('chat',this.chat)
 			let chat = {
 				id: new Date().getTime(),
 				type: type,

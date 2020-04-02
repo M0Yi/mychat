@@ -156,7 +156,6 @@ export default {
 
 
 
-		this.$socket.connect();
 		uni.getSystemInfo({
 			// 获取当前设备的宽高，文档有
 			success: res => {

@@ -33,9 +33,9 @@ const post = (method, data, success = () => {}, complete = () => {}) => {
 				case 401:
 					db.del("userInfo");
 					console.log('pluse login')
-					// uni.reLaunch({
-					// 	url:'/pages/user/login'
-					// })
+					uni.reLaunch({
+						url:'/pages/user/login'
+					})
 					break;
 				default:
 					uni.showToast({
@@ -98,6 +98,9 @@ export const refreshUser = (data, success, complete) => post('user/refreshUser',
 // 发送登陆验证码
 export const sendLoginCaptcha = (data, success, complete) => post('sms/sendLoginCaptcha', data, success, complete);
 
+// 发送绑定验证码
+export const sendBindMobileCaptcha = (data, success, complete) => post('sms/sendBindMobile', data, success, complete);
+
 // 关系列表
 export const friendsList = (data, success, complete) => post('social/friendsList', data, success, complete);
 
@@ -122,4 +125,22 @@ export const cosmosLike = (data, success, complete) => post('cosmos/like', data,
 // 宇宙推送
 export const cosmosPush = (data, success, complete) => post('cosmos/push', data, success, complete);
 
+// 编辑资料
+export const editProfile = (data, success, complete) => post('user/editProfile', data, success, complete);
+
+// 修改密码
+export const changePassword = (data, success, complete) => post('user/changePassword', data, success, complete);
+
+// 修改手机
+export const changeMobile = (data, success, complete) => post('user/changeMobile', data, success, complete);
+
+// 获取CMS详情
+export const cmsGetDetails = (data, success, complete) => post('cms/getDetails', data, success, complete);
+
+// 反馈推送
+export const feedbackPush = (data, success, complete) => post('feedback/push', data, success, complete);
+
+
+// 退出登陆
+export const logout = () => post('user/logout');
 

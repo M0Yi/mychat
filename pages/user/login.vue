@@ -9,11 +9,11 @@
 					
 						
 						<view class="padding text-center">
-							<myButton text="Fast Login"></myButton>
+							<myButton text="快速登录"></myButton>
 						</view>
 						
 						<view class="padding text-center margin-bottom-xl" @tap="Toggle(1)">
-							<myButton text="Account Login"></myButton>
+							<myButton text="账号密码登陆"></myButton>
 						</view>
 					</view>
 				</swiper-item>
@@ -27,12 +27,12 @@
 						</view>
 						<view class="padding text-center">
 							<view @tap="login">
-								<myButton text="Login" :rotate="isRotate"></myButton>
+								<myButton text="登陆" :rotate="isRotate"></myButton>
 							</view>
 						</view>
 						<view class="padding text-right margin-lr margin-bottom ">
 							<view class="inline-shrink" @tap="Toggle(0)">
-								Back
+								返回
 							</view>
 						</view>
 					</view>
@@ -59,7 +59,7 @@
 		methods: {
 			loginSuccess(){
 				uni.reLaunch({
-					url:'../app/index'
+					url:'/pages/app/indexs'
 				})
 			},
 			Toggle(index){

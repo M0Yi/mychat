@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {return;}var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -241,9 +241,11 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
+/^\$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
+
+var ASYNC_API = ['createBLEConnection'];
 
 var CALLBACK_API_RE = /^on/;
 
@@ -251,7 +253,7 @@ function isContextApi(name) {
   return CONTEXT_API_RE.test(name);
 }
 function isSyncApi(name) {
-  return SYNC_API_RE.test(name);
+  return SYNC_API_RE.test(name) && ASYNC_API.indexOf(name) === -1;
 }
 
 function isCallbackApi(name) {
@@ -276,6 +278,19 @@ function shouldPromise(name) {
   return true;
 }
 
+/* eslint-disable no-extend-native */
+if (!Promise.prototype.finally) {
+  Promise.prototype.finally = function (callback) {
+    var promise = this.constructor;
+    return this.then(
+    function (value) {return promise.resolve(callback()).then(function () {return value;});},
+    function (reason) {return promise.resolve(callback()).then(function () {
+        throw reason;
+      });});
+
+  };
+}
+
 function promisify(name, api) {
   if (!shouldPromise(name)) {
     return api;
@@ -289,18 +304,6 @@ function promisify(name, api) {
         success: resolve,
         fail: reject })].concat(
       params));
-      /* eslint-disable no-extend-native */
-      if (!Promise.prototype.finally) {
-        Promise.prototype.finally = function (callback) {
-          var promise = this.constructor;
-          return this.then(
-          function (value) {return promise.resolve(callback()).then(function () {return value;});},
-          function (reason) {return promise.resolve(callback()).then(function () {
-              throw reason;
-            });});
-
-        };
-      }
     })));
   };
 }
@@ -1552,6 +1555,435 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
+/***/ 134:
+/*!********************************************************************!*\
+  !*** /Users/zxx/Local/mychat社交/pages/app?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!.?vue&type=script&lang=js& */ 135);
+/* harmony import */ var _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ 135:
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!/Users/zxx/Local/mychat社交/pages/app?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _default = {
+  data: function data() {
+    return {
+      modalName: null,
+      base: {
+        avatar: this.$config.avatar,
+        CustomBar: this.CustomBar,
+        title: this.$config.title },
+
+      operate: {
+        id: 1 },
+
+      preview: {
+        list: [
+        "https://image.aishencn.com/2020/03/17/095817937_81909778-bbs.jpg"],
+
+        show: false,
+        index: 0 },
+
+      cosmos: {
+        scrollTop: 0,
+        propValue: true,
+        loadMore: false },
+
+      cosmosList: [],
+      menuList: [{
+        name: 'user',
+        label: '用户中心',
+        auth: true,
+        list: [{
+          label: '安全退出',
+          icon: 'cuIcon-exit',
+          auth: true,
+          url: '/pages/user/exit',
+          tag: '' }] }],
+
+
+      // 菜单列表
+      barList: [{
+        label: '社区',
+        icon: 'cuIcon-discover',
+        icons: 'cuIcon-discoverfill',
+        url: '/pages/cms/index' },
+      {
+        label: '资讯',
+        icon: 'my-information',
+        icons: 'my-information-fill',
+        url: '/pages/cms/index' },
+
+      {
+        label: '积分兑换',
+        icon: 'cuIcon-shop',
+        icons: 'cuIcon-shopfill',
+        url: '/pages/shop/index' },
+
+      {
+        label: '我的',
+        icon: 'my-user',
+        icons: 'my-user-fill',
+        url: '/pages/user/index' }],
+
+
+      userInfo: this.$common.userInfo(),
+      newMessageList: [],
+      messageCount: 0,
+      contacts: {
+        list: [{
+          uid: 1,
+          avatar: this.$config.logo,
+          nickname: '默毅',
+          state: '',
+          user: {
+            uid: 1,
+            avatar: this.$config.logo,
+            nickname: '默毅',
+            state: '' } }] },
+
+
+
+
+      tabScroll: 0,
+      currentTab: 0,
+
+      tabScrollItem: 0,
+      currentTabItem: 0,
+
+      //文字笑话
+      list: [],
+      //加载条数
+      pages: 0,
+      pages_all: false };
+
+  },
+  created: function created() {
+    console.log('userInfo', this.userInfo);
+  },
+  onLoad: function onLoad() {var _this = this;
+    this.cosmosGetList();
+    // 注册打开监听
+    uni.$on('socketOpen', function () {
+      console.log('socketOpen 服务器连接成功');
+    });
+
+    // 注册错误监听
+    uni.$on('socketError', function () {
+      console.log('socketError');
+      _this.$common.errorToShow('聊天服务器连接失败，部分功能不可用');
+    });
+
+    // 注册接受消息监听
+    uni.$on('socketMessage', function (res) {
+      console.log('socketMessage', res);
+      switch (res.type) {
+        case 'init':
+          break;
+        // 消息
+        case 'msg':
+          if (res.data.to && res.data.to == _this.userInfo.id) {
+            console.log('收到来自' + res.data.form + '消息', res.data);
+            switch (res.data.type) {
+              case 'text':
+                _this.$audio.palys();
+              case 'tips':
+                console.log('收到用发来的文本消息');
+                _this.$common.addNewMessageList(res.data.form, res.data.value, res.data.type);
+                _this.reMessgaeList();
+                _this.$common.addRecord(res.data.form, res.data);
+                break;
+              default:
+                console.log('非常规消息', res.data);
+                break;}
+
+          } else {
+            console.log('未知来源消息', res);
+            return;
+          }
+          break;
+        // 答复
+        case 'response':
+          _this.$common.updateRecordState(res.data);
+          break;
+        // 心跳
+        case 'ping':
+          uni.sendSocketMessage({
+            data: JSON.stringify({
+              type: 'ping' }) });
+
+
+          console.log('给服务器ping回去');
+          break;
+        default:
+          console.log('啥玩意数据，我咋不认识');
+          break;}
+
+    });
+
+
+
+    uni.getSystemInfo({
+      // 获取当前设备的宽高，文档有
+      success: function success(res) {
+        _this.windowHeight = res.windowHeight;
+        _this.windowWidth = res.windowWidth;
+      } });
+
+
+    // 获取好友列表
+    this.$api.friendsList({}, function (res) {
+      if (res.code != 1) {
+        _this.$common.errorToShow(res.msg);
+      } else {
+        res.data.forEach(function (ele, index) {
+          ele.user.avatar = _this.$common.CDN(ele.user.avatar);
+        });
+        _this.contacts.list = res.data;
+        res.data.forEach(function (ele, index) {
+          _this.$db.set('uid_' + ele.user.id, ele.user);
+        });
+      }
+    });
+    this.reMessgaeList();
+  },
+  methods: {
+    srcollTop: function srcollTop() {
+      console.log('srcollTop');
+
+      //进入页面滚动
+      this.$nextTick(function () {
+        console.log('srcollTop');
+
+        this.cosmos.scrollTop = 0;
+      });
+    },
+    like: function like(index) {var _this2 = this;
+      this.$api.cosmosLike({
+        pid: this.cosmosList[index].id },
+      function (res) {
+        if (res.code) {
+          _this2.cosmosList[index].isLike = res.data;
+          if (res.data) {
+            _this2.cosmosList[index].likes++;
+          } else {
+            _this2.cosmosList[index].likes--;
+          }
+        }
+      });
+    },
+
+    // 宇宙操作
+    feedback: function feedback() {
+      this.$common.errorToShow('反馈id:' + this.operate.id);
+      return;
+      uni.navigateTo({
+        url: '/pages/app/feedback?id=' + this.operate.id });
+
+    },
+    cosmosMoreOperate: function cosmosMoreOperate(index) {
+      this.operate = this.cosmosList[index];
+      this.modalName = 'cosmosMore';
+    },
+    userOpen: function userOpen(index) {
+      this.$db.set('user', this.cosmosList[index]);
+      uni.navigateTo({
+        url: '/pages/app/user/index' });
+
+    },
+    cosmosOpen: function cosmosOpen(index) {
+      this.$db.set('cosmos', this.cosmosList[index]);
+      uni.navigateTo({
+        url: '/pages/app/cosmos/index?id=' + this.operate.id });
+
+    },
+
+    hideModal: function hideModal() {
+      this.modalName = null;
+    },
+
+    cosmosGetList: function cosmosGetList(id) {var _this3 = this;
+      this.$api.getCosmosList({
+        id: id },
+      function (res) {
+        if (res.code) {
+          _this3.cosmosList = [].concat(_toConsumableArray(_this3.cosmosList), _toConsumableArray(res.data));
+          _this3.cosmos.loadMore = true;
+        }
+      });
+    },
+    cosmosTrigger: function cosmosTrigger(i) {var _this4 = this;
+      switch (i) {
+        case 0:
+          // 松开刷新
+          break;
+        case 1:
+          // 触发刷新
+
+          this.$api.getCosmosList({}, function (res) {
+            if (res.code) {
+              _this4.cosmosList = res.data;
+              _this4.cosmos.propValue = !_this4.cosmos.propValue;
+            } else {
+              _this4.$common.errorToShow('空空如也');
+            }
+          });
+          break;
+        case 2:
+          var query = uni.createSelectorQuery().in(this);
+          query.select('#more-text').boundingClientRect(function (data) {
+            if (data.top < 1500) {
+              if (_this4.cosmos.loadMore) {
+                _this4.cosmos.loadMore = false;
+                _this4.cosmosGetList(_this4.cosmosList[_this4.cosmosList.length - 1].id);
+              }
+            }
+          }).exec();
+          // 未触发刷新
+          break;
+        case 3:
+          // 
+          // if (this.cosmos.loadMore) {
+          // 	this.cosmos.loadMore = false;
+          // 	this.cosmosGetList(this.cosmosList[this.cosmosList.length - 1].id);
+          // }
+          // this.cosmosList[this.cosmosList.length-1];
+
+          // console.log('开始预加载',this.cosmosList[this.cosmosList.length-1])
+          break;
+
+        default:
+          break;}
+
+    },
+    previews: function previews(list, index) {
+      this.preview.index = index;
+      this.preview.list = list;
+      this.preview.show = !this.preview.show;
+    },
+    qie: function qie() {
+      uni.reLaunch({
+        url: '/pages/user/login' });
+
+    },
+    clean: function clean() {var _this5 = this;
+      this.newMessageList.forEach(function (ele, index) {
+        _this5.$db.del('Record_' + ele.user.id);
+      });
+      this.newMessageList = [];
+      this.$db.del('NewMessageList');
+      this.$common.errorToShow('缓存清除成功');
+    },
+    // 刷新消息列表
+    reMessgaeList: function reMessgaeList() {var _this6 = this;
+      var count = 0;
+      this.newMessageList = this.$common.getNewMessageList();
+      this.newMessageList.forEach(function (ele, index) {
+        count += ele.tips.count;
+        if (count > 99) {
+          _this6.messageCount = count;
+          return;
+        }
+      });
+      this.messageCount = count;
+    },
+
+    // 初始化时间戳
+    timeToDate: function timeToDate(time) {
+      // console.log('time',time.length)
+      if (time < 9999999999) {
+        time = time * 1000;
+      }
+      // 1584445904420
+      // 1584433709
+      // console.log('time', time)
+      var timeDate = new Date(time);
+      var currentTime = new Date();
+      if (currentTime.getYear() == timeDate.getYear()) {
+        if (new Date(time).toDateString() === new Date().toDateString()) {
+          var hours = timeDate.getHours();
+          var minutes = timeDate.getMinutes();
+          if (hours < 10) {
+            hours = '0' + hours;
+          }
+          if (minutes < 10) {
+            minutes = '0' + minutes;
+          }
+          return hours + ':' + minutes;
+        } else if (new Date(time + 86400).toDateString() === new Date().toDateString()) {
+          return '昨天';
+        }
+        return timeDate.getMonth() + 1 + '月' + timeDate.getDate() + '日';
+      }
+      return timeDate.getYear() + '年' + (timeDate.getMonth() + 1) + '月';
+    },
+
+    // 打开对话
+    openChat: function openChat(arr) {
+      // 打开对话
+      this.$db.set('chat', arr);
+      uni.navigateTo({
+        url: '/pages/app/chat' });
+
+      this.$common.readNewMessageList(arr.id);
+      this.reMessgaeList();
+    },
+    //点击tab menu
+    clickMenu: function clickMenu(e) {
+      var current = e.currentTarget.dataset.current; //获取当前tab的index
+      // 导航tab共2个，获取一个的宽度
+      var tabWidth = this.windowWidth / 4;
+      this.tabScroll = (current - 4) * tabWidth; //使点击的tab始终在居中位置
+      if (this.currentTab == current) {
+        return false;
+      } else {
+        this.currentTab = current;
+      }
+    },
+
+    //活动menu 内容
+    changeContent: function changeContent(e) {
+      var current = e.detail.current; // 获取当前内容所在index,文档有
+      var tabWidth = this.windowWidth / 2;
+      this.currentTab = current;
+      this.tabScroll = (current - 2) * tabWidth;
+    },
+
+    //活动menu 内容
+    changeContentItem: function changeContentItem(e) {
+      var current = e.detail.current; // 获取当前内容所在index,文档有
+      var tabWidth = this.windowWidth / 2;
+      this.currentTabItem = current;
+      this.tabScrollItem = (current - 2) * tabWidth;
+    } },
+
+
+  onShow: function onShow() {
+    console.log('onshow');
+    this.$socket.connect();
+    this.reMessgaeList();
+  },
+  onHide: function onHide() {
+    console.log('onHide');
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 14:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -1587,7 +2019,15 @@ function normalizeComponent (
 
   // fixed by xxxxxx auto components
   if (components) {
-    options.components = Object.assign(components, options.components || {})
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
   }
   // fixed by xxxxxx renderjs
   if (renderjs) {
@@ -1681,34 +2121,935 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.timeout = exports.pingInterval = exports.avatar = exports.logo = exports.lessClass = exports.btnClass = exports.bgClass = exports.title = exports.webSocket = exports.uploadUrl = exports.cdnUrl = exports.apiUrl = void 0; // api调用目录
-var apiUrl = 'https://api.mymoyi.cn/api/moyichat/';
+Object.defineProperty(exports, "__esModule", { value: true });exports.timeout = exports.pingInterval = exports.avatar = exports.logo = exports.title = exports.webSocket = exports.cdnUrl = exports.apiUrl = void 0; // api调用目录
+// export const apiUrl = 'https://api.mymoyi.cn/api/moyichat/'
 // export const apiUrl = 'http://modi.com/api/moyichat/'
+// api调用目录
+// export const apiUrl = 'https://api.mymoyi.cn/api/moyichat/'
+var apiUrl = 'https://api.mymoyi.cn/api/moyicosmic/';
+// export const apiUrl = 'http://192.168.43.15/api/moyicosmic/'
+
 
 // cnd域名。没有就填写后端域名
-exports.apiUrl = apiUrl;var cdnUrl = 'https://moyioss.oss-cn-shanghai.aliyuncs.com';
-// 上传文件地址
-exports.cdnUrl = cdnUrl;var uploadUrl = 'http://modi.com/addons/alioss/index/upload';
+// export const cdnUrl = 'http://modi.com'
+// export const cdnUrl = 'https://api.mymoyi.cn'
+// export const cdnUrl = 'http://cdn-fyx.mymoyi.cn'
+// export const cdnUrl = 'http://192.168.43.15'
+exports.apiUrl = apiUrl;
+var cdnUrl = 'https://moyioss.oss-cn-shanghai.aliyuncs.com';
+
 // webSocket
 // export const webSocket = 'ws://api.mymoyi.cn:8282/'
-exports.uploadUrl = uploadUrl;var webSocket = 'ws://127.0.0.1:8282/';
+exports.cdnUrl = cdnUrl;var webSocket = 'wss://api.mymoyi.cn:8282/';
+// export const webSocket = 'ws://192.168.43.15:8282/'
 
 // 网站标题
-exports.webSocket = webSocket;var title = 'MoYiChat 0.1';
-// 主题样式	背景样式
-exports.title = title;var bgClass = 'bg-gradual-pink text-white'; // bg-admin 可以加上动态背景 就是会占gpu
-// 按钮样式	背景样式
-exports.bgClass = bgClass;var btnClass = 'bg-gradual-pink'; // 
-// 次要样式	文字 图标的颜色
-exports.btnClass = btnClass;var lessClass = 'text-yellow';
+exports.webSocket = webSocket;var title = 'MoYiCosmic 0.1';
 // logo使用base64编码
-exports.lessClass = lessClass;var logo = 'data:image/png;base64,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';
+exports.title = title;var logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAABAlBMVEUAAAAavqAXvJsYvJwXvJwXvJwXu5sYvJwXu5sXvJwXvJsXvJsXvJwXvJsYvZ0YvJwXu5wXu5sXvJsXvJsYvJwYvJwXu5sYvJwYvJwXvJwXvJwZvJwYvJwYvJwYvJwXvJwXvJwXvJwZvJwYvJwXvJwXvJsWvZwXu5sYvJwYvJwYvJwZvJwWu5sYvJwYvJz///8Wu5sTupocvZ77/v34/fzB7eRByK1az7ggvp/0/Prr+fdUzbUswqTw+vjk9/Pd9fDN8Oo5xamD2slJyrAxw6fV8+246uCZ4dOJ3cwlwKGy6N6o5dmf49Vs1L9j0bxPzLPG7uaS39Bz1sK+7ON92cd518WVyv/GAAAALnRSTlMAA/g3/PHs4t3ZzZQzFhDoO+n0x8TAuKSinZCHgHRsaWRJQSkmDgiwWllOLCywHYq11AAABKtJREFUaN7Nmnlb2kAQh0O4JQioiAqi1ba2tt38FjAccsghooi33/+rFLGYQmBniD4t79/4vC7DJHOsxsMTNb5nUslwzK/7fLo/Fk6mMt+NqEf7MFa92a2VmI4RYghG6LGVrax39UMMB+n1gADEDAARWE8fvNPjOdzd8ANCAeDf2D30uFd4I0EfBAl8wYjX41KxHQAECyCw7UbzeScBsQBI7HxeUPFlLwyxIAjvfVnEYfzShQv0XwZb8XU/BOEKhPa/8hzRyJpwzVokynH82PSJd+Db/EE74isQ7wIrccrxiQoHDUKf1I7jIMsBSEWeInisPAfX0WlbJZVFcZZ4SHBAqdUoV7qW4h8KzY3LT17MIe7z5pDzJhTR/zknPzZ5MZeDsjniAgrLZnRmnkeYDqthvnJ2CcV5I7Nyf5+X57g8MTkSsbbvdBjMoIsLc8yVUJ49ZDie7UfgSYYBGdOT6o8eTT/593ReQNr1N0f+Ri0R+t7UezDMcqB6Z75RswiJCE+8Kz07YDly16bNeRXU53c8mo03wXLgoWDadHMQBAmv7fBsgx0Qm3spKLBtHyUe4AfEZkBLRCD+dpAI2AGxqbUZEkTGRzkMMiTAc2FC0qhy/ip4+EeyywrIbcWc4DHHCuTun7p9g/Mvdc7MSS5YDmy81vwHfk5A+uYUD1Jw8B+MJGnQDjwVphzlW54E6dG3tU5L5GnFnKLeAU+yvvqS7YEFAmJzV2JKAi9ZnwVdOPRNB9cQPJAdZuIWyIC08k7Js+RKtjxalCxRZLHidBROJWzUZWtUM6gHMJrnppN6U+RsIBWehKF906mAXJkzKN+d2Dxe3ypOo3/TMqADQlMZzLcgo6VABKRmcmg050tSWhJUQHg8STEHJLUwiIAQ0M9LhLUYFA70yIDQRRhiml8hkTc1rqNuYa7Er+mKg1gNriPfUv2GNR8REB5dVe3tU0hkscD/sqRQSfT5kh7XUVC/JXVF4GWLK+krawr4FT9h2eb8tuzmUfETDoNoQEnKRAuBsJaEupUuvJIfMTvXBdSSpPIBCVTbt6cvFF+4mZk2Z1QliZT6UQ/Iv+jUZzhqp1IQkoz90mIUquUZqd4bp7rqpWXE2JKB6eTxEoIgZtiFBC25n5HqdP+AlahdElFAXDm/rGeAUxJpWa7k0llGXpXAKO5GZSp4kmaF8WJ3EvDaBTej6HYU9gPJLbi1NFPy4CiHc+C0DnYTRIOL6VTvgNUE8ds5gVx3KtWLktnO8RtTVKcqsHuwG1N+i21VJpugKgSrxVYMC6g3foXXMiLiWWTsIZ+IEogYe7AGOLieKIHsVCcHOPxRFHInRAlEjKI4QzVUG3+XQPbH6aEafzwIq0aUQOR4kB50yps8UQKRg056ZCtbRAlEjmzp4TPQJ0ogcvhMj9GROyFKIHKMTi8EkHscp7qiBCIWAuRqAz2iBKJXG/SSBp0zotuhlzT0uglWt1ao9DvMoMfdLc5QahctIgupxRm9AoSUYDqO//8y82PWssuxYB6tyuFWgeGqfHmW/kOMI3fXF46MZbuI4fJKibvLMWzN6HLMsl7zWezC0rJfvZq+RDZ2LXiJ7J9ch/sN+FWRoa0q+bsAAAAASUVORK5CYII=';
 // 次要样式	文字 图标的颜色
 exports.logo = logo;var avatar = cdnUrl + '/assets/img/avatar.png';
 // 本地端主动给服务器ping的时间, 0 则不开启 , 单位秒 
 exports.avatar = avatar;var pingInterval = 0;
 // 超时时间 超出时间段将重连系统 单位秒
 exports.pingInterval = pingInterval;var timeout = 30;exports.timeout = timeout;
+
+/***/ }),
+
+/***/ 16:
+/*!**********************************************!*\
+  !*** /Users/zxx/Local/mychat社交/common/db.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.get = get;exports.set = set;exports.del = del;exports.clear = clear; //取值
+function get(key) {var sync = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  try {
+    if (sync) {
+      var data = uni.getStorageSync(key);
+      if (data.data && data.type == 'object') {
+        return data.data;
+      }
+      return data;
+    } else {
+      var _data = '';
+      uni.getStorage({
+        key: key,
+        success: function success(res) {
+          _data = res.data;
+        } });
+
+      return _data;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
+//赋值
+function set(key, value) {var sync = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  try {
+    if (sync) {
+      return uni.setStorageSync(key, value);
+    } else {
+      uni.setStorage({
+        key: key,
+        data: value });
+
+    }
+  } catch (e) {
+
+  }
+}
+
+//移除
+function del(key) {var sync = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  try {
+    if (sync) {
+      return uni.removeStorageSync(key);
+    } else {
+      uni.removeStorage({
+        key: key });
+
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
+//清空
+function clear() {var sync = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  try {
+    if (sync) {
+      return uni.clearStorageSync();
+    } else {
+      uni.clearStorage();
+    }
+  } catch (e) {
+    return false;
+  }
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 17:
+/*!***********************************************!*\
+  !*** /Users/zxx/Local/mychat社交/common/api.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.logout = exports.feedbackPush = exports.cmsGetDetails = exports.changeMobile = exports.changePassword = exports.editProfile = exports.cosmosPush = exports.cosmosLike = exports.addReview = exports.getReviewList = exports.getCosmosUserList = exports.getCosmosList = exports.getUserInfo = exports.friendsList = exports.sendBindMobileCaptcha = exports.sendLoginCaptcha = exports.refreshUser = exports.mobileLogin = exports.login = exports.init = exports.uploadFile = void 0;var _config = __webpack_require__(/*! ./config.js */ 15);
+
+
+var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 16));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;} //引入common
+
+/**
+ * post请求
+ */
+var post = function post(method, data) {var _success = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};var _complete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
+  var userToken = '';
+  var auth = db.get("userInfo");
+  if (auth) {
+    if (auth.expiretime > new Date() / 1000) {
+      userToken = auth.token;
+    }
+  }
+  uni.request({
+    url: _config.apiUrl + method,
+    data: data,
+    header: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'token': userToken },
+
+    method: 'POST',
+    success: function success(response) {
+      var result = response.data;
+      switch (result.code) {
+        case 0:
+        case 1:
+          _success(result);
+          break;
+        case 401:
+          db.del("userInfo");
+          console.log('pluse login');
+          uni.reLaunch({
+            url: '/pages/user/login' });
+
+          break;
+        default:
+          uni.showToast({
+            title: result.msg,
+            icon: 'none',
+            duration: 2000 });
+
+          break;}
+
+    },
+    complete: function complete() {
+      _complete();
+    } });
+
+};
+
+/**
+    * 
+    */
+var uploadFile = function uploadFile(filePath) {var _success2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};var _fail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'image';
+
+  var formData = {
+    file: filePath };
+
+  var auth = db.get("userInfo");
+  var userToken = '';
+  if (auth) {
+    userToken = auth.token;
+  }
+  uni.uploadFile({
+    url: _config.apiUrl + 'Common/upload',
+    filePath: filePath,
+    fileType: type,
+    name: 'file',
+    header: {
+      'token': userToken },
+
+    formData: formData,
+    success: function success(uploadFileRes) {
+      _success2(JSON.parse(uploadFileRes.data));
+    },
+    fail: function fail(error) {
+      _fail(error);
+    } });
+
+};
+
+// 初始化
+exports.uploadFile = uploadFile;var init = function init(data, success, complete) {return post('init', data, success, complete);};
+
+// 登陆
+exports.init = init;var login = function login(data, success, complete) {return post('user/login', data, success, complete);};
+
+// 手机登陆
+exports.login = login;var mobileLogin = function mobileLogin(data, success, complete) {return post('user/mobileLogin', data, success, complete);};
+
+// 刷新用户
+exports.mobileLogin = mobileLogin;var refreshUser = function refreshUser(data, success, complete) {return post('user/refreshUser', data, success, complete);};
+
+// 发送登陆验证码
+exports.refreshUser = refreshUser;var sendLoginCaptcha = function sendLoginCaptcha(data, success, complete) {return post('sms/sendLoginCaptcha', data, success, complete);};
+
+// 发送绑定验证码
+exports.sendLoginCaptcha = sendLoginCaptcha;var sendBindMobileCaptcha = function sendBindMobileCaptcha(data, success, complete) {return post('sms/sendBindMobile', data, success, complete);};
+
+// 关系列表
+exports.sendBindMobileCaptcha = sendBindMobileCaptcha;var friendsList = function friendsList(data, success, complete) {return post('social/friendsList', data, success, complete);};
+
+// 关系用户信息
+exports.friendsList = friendsList;var getUserInfo = function getUserInfo(data, success, complete) {return post('social/getUserInfo', data, success, complete);};
+
+// 宇宙列表
+exports.getUserInfo = getUserInfo;var getCosmosList = function getCosmosList(data, success, complete) {return post('cosmos/getList', data, success, complete);};
+
+// 宇宙列表
+exports.getCosmosList = getCosmosList;var getCosmosUserList = function getCosmosUserList(data, success, complete) {return post('cosmos/getUserList', data, success, complete);};
+
+// 宇宙回响
+exports.getCosmosUserList = getCosmosUserList;var getReviewList = function getReviewList(data, success, complete) {return post('cosmos/getReview', data, success, complete);};
+
+// 宇宙回响
+exports.getReviewList = getReviewList;var addReview = function addReview(data, success, complete) {return post('cosmos/review', data, success, complete);};
+
+// 宇宙标记
+exports.addReview = addReview;var cosmosLike = function cosmosLike(data, success, complete) {return post('cosmos/like', data, success, complete);};
+
+// 宇宙推送
+exports.cosmosLike = cosmosLike;var cosmosPush = function cosmosPush(data, success, complete) {return post('cosmos/push', data, success, complete);};
+
+// 编辑资料
+exports.cosmosPush = cosmosPush;var editProfile = function editProfile(data, success, complete) {return post('user/editProfile', data, success, complete);};
+
+// 修改密码
+exports.editProfile = editProfile;var changePassword = function changePassword(data, success, complete) {return post('user/changePassword', data, success, complete);};
+
+// 修改手机
+exports.changePassword = changePassword;var changeMobile = function changeMobile(data, success, complete) {return post('user/changeMobile', data, success, complete);};
+
+// 获取CMS详情
+exports.changeMobile = changeMobile;var cmsGetDetails = function cmsGetDetails(data, success, complete) {return post('cms/getDetails', data, success, complete);};
+
+// 反馈推送
+exports.cmsGetDetails = cmsGetDetails;var feedbackPush = function feedbackPush(data, success, complete) {return post('feedback/push', data, success, complete);};
+
+
+// 退出登陆
+exports.feedbackPush = feedbackPush;var logout = function logout() {return post('user/logout');};exports.logout = logout;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 172:
+/*!****************************************************************************!*\
+  !*** /Users/zxx/Local/mychat社交/pages/app/chat.js?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./chat.js?vue&type=script&lang=js& */ 173);
+/* harmony import */ var _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_Alpha_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ 173:
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!/Users/zxx/Local/mychat社交/pages/app/chat.js?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  data: function data() {
+    return {
+      scrollAnimation: false, //滑动动画开关
+      scrollTop: 0, //竖向滚动条位置
+      scrollToView: '', //滚动到元素位置
+      InputBottom: 0,
+
+      record: [{
+        "id": 1583304081699,
+        "type": "text",
+        "to": 1074,
+        "from": 1081,
+        "value": "娃大王的娃",
+        "state": "Fail",
+        "time": 1583304081699 },
+      {
+        "id": 1583304081,
+        "to": "1081",
+        "form": 1074,
+        "type": "tips",
+        "value": "You have been blacklisted or deleted by the other party" }],
+
+      base: {
+        avatar: this.$config.avatar,
+        CustomBar: this.CustomBar },
+
+
+      chat: {
+        id: 1,
+        type: 'caht',
+        nickname: '默毅',
+        avatar: this.$config.logo,
+        inputText: '' },
+
+
+      inputText: '',
+      userInfo: this.$common.userInfo(),
+
+
+      tabScroll: 0,
+      currentTab: 3,
+
+      tabScrollItem: 0,
+      currentTabItem: 0,
+
+      //文字笑话
+      list: [],
+      //加载条数
+      pages: 0,
+      pages_all: false };
+
+  },
+  created: function created() {
+
+  },
+  onLoad: function onLoad() {var _this = this;
+    // console.log('page.route	',getCurrentPages())
+    // let CP = getCurrentPages();
+    // console.log('cp',CP.length);
+
+    // if(CP.length == 1 || CP[CP.length-2].route == '/pages/app/index'){
+    // 	console.log('并非当前页面')
+    // 	uni.reLaunch({
+    // 		url:'/pages/app/index'
+    // 	})
+    // }
+    // let peges = getCurrentPages();
+    // // let page = ;
+    // console.log('pages[pages.length',getCurrentPages()[getCurrentPages().length]);
+
+    // let pages = getCurrentPages();
+    // let page = pages[pages.length - 1];
+
+    // this.loadShow = true;
+    var chat = this.$db.get('chat');
+
+
+    console.log('onLoad,chat', chat);
+    if (chat.user_id) {
+      chat.id = chat.user_id;
+    }
+    this.$common.addUserInfo(chat);
+    this.chat = chat;
+    this.title = chat.nickname;
+
+    //进入页面滚动到底部
+    this.$nextTick(function () {
+      this.scrollTop = 99999;
+    });
+
+    this.record = this.$common.getRecord(chat.id);
+
+    // 注册接受消息监听
+    uni.$on('socketMessage', function (res) {
+      var data = res.data;
+      // console.log('socketMessage',res)
+      switch (res.type) {
+        case 'init':
+          break;
+        // 消息
+        case 'msg':
+          if (data.to == chat.id || data.form == chat.id) {
+            switch (data.type) {
+              case 'text':
+                _this.record.push(data);
+                _this.goViewId(data.id);
+                break;
+              case 'tips':
+                console.log('监听到提示消息');
+                _this.record.push(data);
+                _this.goViewId(data.id);
+                break;
+              default:
+                console.log('监听到未标记消息');
+                break;}
+
+          } else {
+            switch (data.type) {
+              case 'text':
+                var userInfo = _this.$common.getUserInfo(data.form);
+                break;}
+
+          }
+          break;
+        // 答复
+        case 'response':
+          // 监听到答复
+          if (data.to == chat.id || data.form == chat.id) {
+            var record = _this.record;
+            for (var i = record.length - 1; i >= 0; i--) {
+              // 查找ID
+              if (record[i].id == data.id) {
+                _this.record[i].state = data.value;
+                i = 0;
+              }
+            }
+          }
+          break;
+        default:
+          console.log(res.type + '数据不作处理');
+          break;}
+
+    });
+
+  },
+  methods: {
+    navigateBack: function navigateBack() {
+      uni.navigateBack({});
+
+
+    },
+    test1: function test1() {
+      //进入页面滚动到底部
+      this.$nextTick(function () {
+        this.scroc = 99999;
+      });
+    },
+    sendBtn: function sendBtn() {
+      var text = this.inputText;
+      console.log('this.chat.inputText', text);
+      if (text) {
+        this.send(text);
+        this.inputText = '';
+      }
+    },
+    send: function send(value) {var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'text';
+      console.log('chat', this.chat);
+      var chat = {
+        id: new Date().getTime(),
+        type: type,
+        to: this.chat.id,
+        from: this.userInfo.id,
+        value: value,
+        state: 'Sending',
+        time: new Date().getTime() };
+
+      this.$common.addRecord(this.chat.id, chat);
+      this.$common.addNewMessageList(this.chat.id, chat.value);
+      this.record.push(chat);
+      this.goViewId(chat.id);
+      console.log('发送数据', chat);
+      uni.sendSocketMessage({
+        data: JSON.stringify(chat) });
+
+    },
+    goViewId: function goViewId(id) {var _this2 = this;
+      if (id) {
+        this.$nextTick(function () {
+          _this2.scrollToView = 'msg' + id;
+        });
+      }
+    } },
+
+  // 页面卸载的时候清除当前消息数量
+  onUnload: function onUnload() {
+    this.$common.readNewMessageList(this.chat.id);
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 18:
+/*!**************************************************!*\
+  !*** /Users/zxx/Local/mychat社交/common/common.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.timeToDate = timeToDate;exports.exitLogin = exitLogin;exports.getBase = getBase;exports.CDN = CDN;exports.errorToShow = errorToShow;exports.respond = respond;exports.saveUserInfo = saveUserInfo;exports.userInfo = userInfo;exports.addRecord = addRecord;exports.getRecord = getRecord;exports.updateRecordState = updateRecordState;exports.getUserInfo = getUserInfo;exports.addUserInfo = addUserInfo;exports.getNewMessageList = getNewMessageList;exports.addNewMessageList = addNewMessageList;exports.readNewMessageList = readNewMessageList;exports.isRoute = isRoute;exports.testString = testString;var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 16));
+var api = _interopRequireWildcard(__webpack_require__(/*! ./api.js */ 17));
+
+var _config = __webpack_require__(/*! ./config.js */ 15);function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;} //引入数据库操作
+
+
+
+
+/**
+ * 失败提示
+ * @param {String} msg 提示消息
+ * @param {Function} callback 回调函数
+ */
+
+function errorToShow() {var msg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '操作失败';var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+  uni.showToast({
+    title: msg,
+    icon: 'none',
+    duration: 2000,
+    mask: true });
+
+  setTimeout(function () {
+    callback();
+  }, 2000);
+}
+/**
+   * 交互反馈震动加音频
+   * @param {Object} src
+   */
+function respond(src) {
+  if (!src) {
+    src =
+    'data:audio/mpeg;base64,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';
+  }
+  // 短震动
+  uni.vibrateShort({});
+  // 播放提示音
+  var innerAudioContext = uni.createInnerAudioContext();
+  innerAudioContext.autoplay = true;
+  innerAudioContext.src = src;
+  innerAudioContext.onError(function (res) {
+    return false;
+  });
+  innerAudioContext.play();
+  return true;
+}
+
+
+/**
+   * 添加cdn
+   * @param {Object} srcUrl
+   */
+function CDN(srcUrl) {
+  if (srcUrl) {
+    if (srcUrl.substring(0, 9) == '/uploads/') {
+      return _config.cdnUrl + srcUrl;
+    }
+  }
+  return srcUrl;
+}
+
+/**
+   * 用户信息
+   * @param {Array} data 用户数据
+   */
+function userInfo() {
+  return db.get('userInfo');
+}
+
+/**
+   * 保存登陆状态
+   * @param {Array} data 用户数据
+   */
+function saveUserInfo(data) {
+  data.userInfo.avatar = CDN(data.userInfo.avatar);
+  db.set('userInfo', data.userInfo);
+}
+
+/**
+   * 添加聊天记录
+   */
+
+function addRecord(id, data) {
+  var name = 'Record_' + id;
+  var rec = db.get(name);
+  console.log('新增聊天记录addRecord');
+  if (rec) {
+    rec.push(data);
+    db.set('Record_' + id, rec);
+  } else {
+    db.set('Record_' + id, [data]);
+  }
+}
+
+
+/**
+   * 添加聊天记录
+   */
+
+function getRecord(id) {
+
+  console.log('getRecord');
+  var rec = db.get('Record_' + id);
+  if (rec) {
+    console.log('recc', rec);
+    return rec;
+  } else {
+    return [];
+  }
+}
+
+/**
+   * 更新聊天记录状态
+   */
+
+function updateRecordState(data) {
+  console.log('试图更新聊天记录状态');
+  var id = userInfo().id;
+  console.log('updateRecordState', data);
+  var record = db.get('Record_' + data.form);
+  console.log('record', record);
+
+  if (data.to == chat.id || data.form == chat.id) {
+    var _record = this.record;
+    for (var i = _record.length - 1; i >= 0; i--) {
+      // 查找ID
+      if (_record[i].id == data.id) {
+        this.record[i].state = data.value;
+        i = 0;
+      }
+    }
+  }
+
+  if (record) {
+    // 开始查找数据
+    for (var i = record.length - 1; i >= 0; i--) {
+      if (record[i].id == data.id) {
+        console.log('找到数据更新完成');
+        record[i].state = data.value;
+        db.set('Record_' + data.form, record);
+        i = 0;
+      }
+    }
+  }
+}
+
+function getUserInfo(id) {
+  var rec = db.get('uid_' + id);
+  if (rec) {
+    return rec;
+  } else {
+    var info = userInfo();
+    if (id == info.id) {
+      return info;
+    } else {
+      return { 'id': 0 };
+    }
+  }
+}
+
+
+function addUserInfo(arr) {
+  // let rec = db.get('uid_'+arr.id);
+  // if(arr.user_id){
+  // 	arr.id = user_id
+  // }
+  db.set('uid_' + arr.id, arr);
+}
+
+
+function addNewMessageList() {var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '1';var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "消灭人类暴政！世界属于三体！";var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "text";var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new Date().getTime();var count = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+  var user = getUserInfo(id);
+  console.log('试图添加NewMessageList', user);
+  var tips = {
+    count: count,
+    value: value,
+    type: type,
+    time: time };
+
+  if (user.id == 0) {
+    api.getUserInfo({ id: id }, function (res) {
+      if (res.code) {
+        db.set('uid_' + id, res.data);
+        addNewmsg(res.data, tips);
+      }
+    });
+  } else {
+    addNewmsg(user, tips);
+    // if(list){
+    // 	for (var i = list.length - 1; i >= 0; i--){
+    // 		if(user.id == list[i].user.id){
+    // 			tips.count += list[i].tips.count;
+    // 			if(tips.type=='tips'){
+    // 				tips.time = list[i].tips.time;
+    // 			}
+    // 			list.splice(i, 1);
+    // 		}
+    // 	}
+    // 	list.unshift({user:user,tips:tips})
+    // 	db.set('NewMessageList',list);
+    // }else{
+    // 	db.set('NewMessageList',[{user:user,tips:tips}]);
+    // }
+  }
+
+
+}
+
+function addNewmsg(user, tips) {
+  var list = db.get('NewMessageList');
+  if (list) {
+    for (var i = list.length - 1; i >= 0; i--) {
+      if (user.id == list[i].user.id) {
+        tips.count += list[i].tips.count;
+        if (tips.type == 'tips') {
+          tips.time = list[i].tips.time;
+        }
+        list.splice(i, 1);
+      }
+    }
+    list.unshift({ user: user, tips: tips });
+    db.set('NewMessageList', list);
+  } else {
+    db.set('NewMessageList', [{ user: user, tips: tips }]);
+  }
+}
+
+function getNewMessageList() {
+  console.log('NewMessageList');
+  var list = db.get('NewMessageList');
+  if (list) {
+    return list;
+  } else {
+    return [];
+  }
+}
+function readNewMessageList(id) {
+  var list = db.get('NewMessageList');
+  if (list) {
+    for (var i = list.length - 1; i >= 0; i--) {
+      if (id == list[i].user.id) {
+        list[i].tips.count = 0;
+      }
+    }
+    db.set('NewMessageList', list);
+  }
+  uni.$emit('reMessgaeList');
+}
+
+/**
+   * 判断当前路由
+   */
+function isRoute() {var route = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/pages/index/index";
+  var pages = getCurrentPages();
+  var page = pages[pages.length - 1];
+  if (route == page.route) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function getBase() {
+  // let arr ;
+  return {
+    cdnUrl: _config.cdnUrl };
+
+}
+
+function exitLogin() {
+  db.del('userInfo');
+  console.log('尝试关闭socket');
+
+  uni.onSocketClose(function (res) {
+    console.log('WebSocket 已关闭！');
+  });
+  uni.reLaunch({
+    url: '/pages/user/login' });
+
+}
+function timeToDate(time) {var t = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  if (time < 9999999999) {
+    time = time * 1000;
+  }
+  var timeDate = new Date(time);
+  var currentTime = new Date();
+  if (currentTime.getYear() == timeDate.getYear()) {
+    if (new Date(time).toDateString() === new Date().toDateString()) {
+      var hours = timeDate.getHours();
+      var minutes = timeDate.getMinutes();
+      if (hours < 10) {
+        hours = '0' + hours;
+      }
+      if (minutes < 10) {
+        minutes = '0' + minutes;
+      }
+      return hours + ':' + minutes;
+    } else if (new Date(time + 86400).toDateString() === new Date().toDateString()) {
+      return '昨天';
+    }
+    return timeDate.getMonth() + 1 + '月' + timeDate.getDate() + '日';
+  }
+  return timeDate.getYear() + '年' + (timeDate.getMonth() + 1) + '月';
+}
+
+
+
+/**
+   * 字符串效验
+   * @param {String} str 字符串
+   * @param {String} model = [number|mobile|name|idcard|] 模式
+   * @example 
+   * testString('17080057443','mobile')
+   */
+
+function testString(str) {var model = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  if (typeof model == 'number') {
+    if (str.length >= model) {
+      return true;
+    }
+  } else {
+    switch (model) {
+      case null:
+        return false;
+        break;
+      case 'idcard':
+        return RegExp(/^[1-9]\d{5}(19|20)\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/).test(str);
+        break;
+      case 'mobile':
+        return RegExp(/^1[0-9]{10}$/).test(str);
+        break;
+      case 'name':
+        return RegExp(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/).test(str);
+        break;
+      default:
+        return false;
+        break;}
+
+  }
+  return false;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 19:
+/*!**************************************************!*\
+  !*** /Users/zxx/Local/mychat社交/common/socket.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.connect = connect;var common = _interopRequireWildcard(__webpack_require__(/*! ./common.js */ 18));
+var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 16));
+
+
+var _config = __webpack_require__(/*! ./config.js */ 15);function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;} //引入参数操作
+
+
+
+
+
+var test = 'ok';
+var state = 'fail';
+var time = 0;
+function connect() {
+  console.log('尝试重启', state);
+  var newTime = new Date().getTime() - time;
+  // 时间超过30秒未沟通允许重启
+  if (state != 'connect') {
+    var userInfo = common.userInfo();
+    uni.connectSocket({
+      url: _config.webSocket + '?id=' + userInfo.id + '&token=' + userInfo.token });
+
+    uni.onSocketOpen(function (res) {
+      state = 'connect';
+      console.log('WebSocket连接已打开！');
+      if (_config.pingInterval) {
+        ping();
+      }
+      time = new Date().getTime();
+      console.log('time', time);
+      uni.$emit('socketOpen');
+    });
+    uni.onSocketError(function (res) {
+      state = 'fail';
+      uni.$emit('socketError');
+      console.log('WebSocket连接打开失败！');
+      // common.errorToShow('WebSocket连接打开失败，请检查！');
+    });
+    uni.onSocketMessage(function (res) {
+      try {
+        // console.log('onSocketMessage',res)
+        time = new Date().getTime();
+        res = JSON.parse(res.data);
+        if (res.code == 401) {
+          state = 'fail';
+          console.log('未登陆');
+          common.exitLogin();
+        }
+        uni.$emit('socketMessage', res);
+      } catch (e) {
+        console.log('接受到错误格式消息');
+      }
+    });
+  } else {
+    console.log('WebSocket正常状态无需重连');
+  }
+
+}
+
+function ping() {
+  console.log('主动ping给服务器');
+  uni.sendSocketMessage({
+    data: JSON.stringify({ type: 'ping' }) });
+
+  setTimeout(function () {
+    if (state == 'connect') {
+      ping();
+    }
+  }, _config.pingInterval * 1000);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -7742,563 +9083,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 23:
-/*!**********************************************!*\
-  !*** /Users/zxx/Local/mychat社交/common/db.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.get = get;exports.set = set;exports.del = del;exports.clear = clear; //取值
-function get(key) {var sync = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  try {
-    if (sync) {
-      var data = uni.getStorageSync(key);
-      if (data.data && data.type == 'object') {
-        return data.data;
-      }
-      return data;
-    } else {
-      var _data = '';
-      uni.getStorage({
-        key: key,
-        success: function success(res) {
-          _data = res.data;
-        } });
-
-      return _data;
-    }
-  } catch (e) {
-    return false;
-  }
-}
-
-//赋值
-function set(key, value) {var sync = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  try {
-    if (sync) {
-      return uni.setStorageSync(key, value);
-    } else {
-      uni.setStorage({
-        key: key,
-        data: value });
-
-    }
-  } catch (e) {
-
-  }
-}
-
-//移除
-function del(key) {var sync = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  try {
-    if (sync) {
-      return uni.removeStorageSync(key);
-    } else {
-      uni.removeStorage({
-        key: key });
-
-    }
-  } catch (e) {
-    return false;
-  }
-}
-
-//清空
-function clear() {var sync = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-  try {
-    if (sync) {
-      return uni.clearStorageSync();
-    } else {
-      uni.clearStorage();
-    }
-  } catch (e) {
-    return false;
-  }
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 24:
-/*!***********************************************!*\
-  !*** /Users/zxx/Local/mychat社交/common/api.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.cosmosLike = exports.addReview = exports.getReviewList = exports.getCosmosUserList = exports.getCosmosList = exports.getUserInfo = exports.friendsList = exports.sendLoginCaptcha = exports.refreshUser = exports.mobileLogin = exports.login = exports.init = exports.uploadFile = void 0;var _config = __webpack_require__(/*! ./config.js */ 15);
-
-
-
-var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 23));function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};if (desc.get || desc.set) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;return newObj;}} //引入common
-
-/**
- * post请求
- */
-var post = function post(method, data) {var _success = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};var _complete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
-  var userToken = '';
-  var auth = db.get("userInfo");
-  if (auth) {
-    if (auth.expiretime > new Date() / 1000) {
-      userToken = auth.token;
-    }
-  }
-  uni.request({
-    url: _config.apiUrl + method,
-    data: data,
-    header: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'token': userToken },
-
-    method: 'POST',
-    success: function success(response) {
-      var result = response.data;
-      switch (result.code) {
-        case 0:
-        case 1:
-          _success(result);
-          break;
-        case 401:
-          db.del("userInfo");
-          console.log('pluse login');
-          // uni.reLaunch({
-          // 	url:'/pages/user/login'
-          // })
-          break;
-        default:
-          uni.showToast({
-            title: result.msg,
-            icon: 'none',
-            duration: 2000 });
-
-          break;}
-
-    },
-    complete: function complete() {
-      _complete();
-    } });
-
-};
-
-
-// 上传图片
-var uploadFile = function uploadFile(method) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var callback = arguments.length > 2 ? arguments[2] : undefined;var num = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-  if (type) {
-    method = type + '/' + method;
-  } else {
-    method = 'Moyi/' + method;
-  }
-  uni.chooseImage({
-    count: num,
-    success: function success(res) {
-      uni.showLoading({
-        title: '上传中...' });
-
-      var tempFilePaths = res.tempFilePaths;
-      for (var i = 0; i < tempFilePaths.length; i++) {
-        data.file = tempFilePaths[i];
-        uni.uploadFile({
-          url: baseApiUrl + method,
-          filePath: tempFilePaths[i],
-          fileType: 'image',
-          name: 'file',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data' },
-
-          formData: data,
-          success: function success(uploadFileRes) {
-            callback(JSON.parse(uploadFileRes.data));
-          },
-          fail: function fail(error) {
-            if (error && error.response) {
-              common.showError(error.response);
-            }
-          },
-          complete: function complete() {
-            setTimeout(function () {
-              uni.hideLoading();
-            }, 250);
-          } });
-
-      }
-    } });
-
-};
-
-// 初始化
-exports.uploadFile = uploadFile;var init = function init(data, success, complete) {return post('init', data, success, complete);};
-
-// 登陆
-exports.init = init;var login = function login(data, success, complete) {return post('user/login', data, success, complete);};
-
-// 手机登陆
-exports.login = login;var mobileLogin = function mobileLogin(data, success, complete) {return post('user/mobileLogin', data, success, complete);};
-
-// 刷新用户
-exports.mobileLogin = mobileLogin;var refreshUser = function refreshUser(data, success, complete) {return post('user/refreshUser', data, success, complete);};
-
-// 发送登陆验证码
-exports.refreshUser = refreshUser;var sendLoginCaptcha = function sendLoginCaptcha(data, success, complete) {return post('sms/sendLoginCaptcha', data, success, complete);};
-
-// 关系列表
-exports.sendLoginCaptcha = sendLoginCaptcha;var friendsList = function friendsList(data, success, complete) {return post('social/friendsList', data, success, complete);};
-
-// 关系用户信息
-exports.friendsList = friendsList;var getUserInfo = function getUserInfo(data, success, complete) {return post('social/getUserInfo', data, success, complete);};
-
-// 宇宙列表
-exports.getUserInfo = getUserInfo;var getCosmosList = function getCosmosList(data, success, complete) {return post('cosmos/getList', data, success, complete);};
-
-// 宇宙列表
-exports.getCosmosList = getCosmosList;var getCosmosUserList = function getCosmosUserList(data, success, complete) {return post('cosmos/getUserList', data, success, complete);};
-
-// 宇宙回响
-exports.getCosmosUserList = getCosmosUserList;var getReviewList = function getReviewList(data, success, complete) {return post('cosmos/getReview', data, success, complete);};
-
-// 宇宙回响
-exports.getReviewList = getReviewList;var addReview = function addReview(data, success, complete) {return post('cosmos/review', data, success, complete);};
-
-// 宇宙标记
-exports.addReview = addReview;var cosmosLike = function cosmosLike(data, success, complete) {return post('cosmos/like', data, success, complete);};exports.cosmosLike = cosmosLike;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 25:
-/*!**************************************************!*\
-  !*** /Users/zxx/Local/mychat社交/common/common.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.exitLogin = exitLogin;exports.getBase = getBase;exports.CDN = CDN;exports.errorToShow = errorToShow;exports.respond = respond;exports.saveUserInfo = saveUserInfo;exports.userInfo = userInfo;exports.addRecord = addRecord;exports.getRecord = getRecord;exports.updateRecordState = updateRecordState;exports.getUserInfo = getUserInfo;exports.getNewMessageList = getNewMessageList;exports.addNewMessageList = addNewMessageList;exports.readNewMessageList = readNewMessageList;exports.isRoute = isRoute;var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 23));
-var api = _interopRequireWildcard(__webpack_require__(/*! ./api.js */ 24));
-
-var _config = __webpack_require__(/*! ./config.js */ 15);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};if (desc.get || desc.set) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;return newObj;}} //引入数据库操作
-
-
-
-
-/**
- * 失败提示
- * @param {String} msg 提示消息
- * @param {Function} callback 回调函数
- */
-
-function errorToShow() {var msg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '操作失败';var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-  uni.showToast({
-    title: msg,
-    icon: 'none',
-    duration: 2000,
-    mask: true });
-
-  setTimeout(function () {
-    callback();
-  }, 2000);
-}
-/**
-   * 交互反馈震动加音频
-   * @param {Object} src
-   */
-function respond(src) {
-  if (!src) {
-    src =
-    'data:audio/mpeg;base64,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';
-  }
-  // 短震动
-  uni.vibrateShort({});
-  // 播放提示音
-  var innerAudioContext = uni.createInnerAudioContext();
-  innerAudioContext.autoplay = true;
-  innerAudioContext.src = src;
-  innerAudioContext.onError(function (res) {
-    return false;
-  });
-  innerAudioContext.play();
-  return true;
-}
-
-
-/**
-   * 添加cdn
-   * @param {Object} srcUrl
-   */
-function CDN(srcUrl) {
-  if (srcUrl) {
-    if (srcUrl.substring(0, 9) == '/uploads/') {
-      return _config.cdnUrl + srcUrl;
-    }
-  }
-  return srcUrl;
-}
-
-/**
-   * 用户信息
-   * @param {Array} data 用户数据
-   */
-function userInfo() {
-  return db.get('userInfo');
-}
-
-/**
-   * 保存登陆状态
-   * @param {Array} data 用户数据
-   */
-function saveUserInfo(data) {
-  data.userInfo.avatar = CDN(data.userInfo.avatar);
-  db.set('userInfo', data.userInfo);
-}
-
-/**
-   * 添加聊天记录
-   */
-
-function addRecord(id, data) {
-  var name = 'Record_' + id;
-  var rec = db.get(name);
-  console.log('新增聊天记录addRecord');
-  if (rec) {
-    rec.push(data);
-    db.set('Record_' + id, rec);
-  } else {
-    db.set('Record_' + id, [data]);
-  }
-}
-
-
-/**
-   * 添加聊天记录
-   */
-
-function getRecord(id) {
-  console.log('getRecord');
-  var rec = db.get('Record_' + id);
-  if (rec) {
-    console.log('recc', rec);
-    return rec;
-  } else {
-    return [];
-  }
-}
-
-/**
-   * 更新聊天记录状态
-   */
-
-function updateRecordState(data) {
-  var id = userInfo().id;
-  console.log('updateRecordState', data);
-  var record = db.get('Record_' + data.froms);
-  console.log('record', data);
-  if (record) {
-    // 开始查找数据
-    for (var i = record.length - 1; i >= 0; i--) {
-
-      if (record[i].id == data.id) {
-        console.log('找到数据更新完成');
-        record[i].state = data.value;
-        db.set('Record_' + data.froms, record);
-        i = 0;
-      }
-    }
-  }
-}
-
-function getUserInfo(id) {
-  var rec = db.get('uid_' + id);
-  if (rec) {
-    return rec;
-  } else {
-    var info = userInfo();
-    if (id == info.id) {
-      return info;
-    } else {
-      api.getUserInfo({ id: id }, function (res) {
-        if (res.code) {
-          db.set('uid_' + id, res.data);
-          return res.data;
-        }
-      });
-    }
-  }
-}
-
-
-function addNewMessageList() {var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '1';var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "消灭人类暴政！世界属于三体！";var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "text";var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new Date().getTime();var count = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
-  var user = getUserInfo(id);
-  if (user.length == 0) {
-    return;
-  };
-  var tips = {
-    count: count,
-    value: value,
-    type: type,
-    time: time };
-
-  var list = db.get('NewMessageList');
-  if (list) {
-    for (var i = list.length - 1; i >= 0; i--) {
-      if (user.id == list[i].user.id) {
-        tips.count += list[i].tips.count;
-        if (tips.type == 'tips') {
-          tips.time = list[i].tips.time;
-        }
-        list.splice(i, 1);
-      }
-    }
-    list.unshift({ user: user, tips: tips });
-    db.set('NewMessageList', list);
-  } else {
-    db.set('NewMessageList', [{ user: user, tips: tips }]);
-  }
-}
-
-
-function getNewMessageList() {
-  console.log('NewMessageList');
-  var list = db.get('NewMessageList');
-  if (list) {
-    return list;
-  } else {
-    return [];
-  }
-}
-function readNewMessageList(id) {
-  var list = db.get('NewMessageList');
-  if (list) {
-    for (var i = list.length - 1; i >= 0; i--) {
-      if (id == list[i].user.id) {
-        list[i].tips.count = 0;
-      }
-    }
-    db.set('NewMessageList', list);
-  }
-}
-
-/**
-   * 判断当前路由
-   */
-function isRoute() {var route = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/pages/index/index";
-  var pages = getCurrentPages();
-  var page = pages[pages.length - 1];
-  if (route == page.route) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function getBase() {
-  // let arr ;
-  return {
-    cdnUrl: _config.cdnUrl };
-
-}
-
-function exitLogin() {
-  db.del('userInfo');
-  console.log('尝试关闭socket');
-
-  uni.onSocketClose(function (res) {
-    console.log('WebSocket 已关闭！');
-  });
-  uni.reLaunch({
-    url: '/pages/user/login' });
-
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 26:
-/*!**************************************************!*\
-  !*** /Users/zxx/Local/mychat社交/common/socket.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.connect = connect;var common = _interopRequireWildcard(__webpack_require__(/*! ./common.js */ 25));
-var db = _interopRequireWildcard(__webpack_require__(/*! ./db.js */ 23));
-
-
-var _config = __webpack_require__(/*! ./config.js */ 15);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};if (desc.get || desc.set) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;return newObj;}} //引入参数操作
-
-
-
-
-
-var test = 'ok';
-var state = 'fail';
-var time = 0;
-function connect() {
-  console.log('尝试重启', state);
-  var newTime = new Date().getTime() - time;
-  // 时间超过30秒未沟通允许重启
-  if (state != 'connect') {
-    var userInfo = common.userInfo();
-    uni.connectSocket({
-      url: _config.webSocket + '?id=' + userInfo.id + '&token=' + userInfo.token });
-
-    uni.onSocketOpen(function (res) {
-      state = 'connect';
-      console.log('WebSocket连接已打开！');
-      if (_config.pingInterval) {
-        ping();
-      }
-      time = new Date().getTime();
-      console.log('time', time);
-      uni.$emit('socketOpen');
-    });
-    uni.onSocketError(function (res) {
-      state = 'fail';
-      uni.$emit('socketError');
-      console.log('WebSocket连接打开失败！');
-      // common.errorToShow('WebSocket连接打开失败，请检查！');
-    });
-    uni.onSocketMessage(function (res) {
-      try {
-        // console.log('onSocketMessage',res)
-        time = new Date().getTime();
-        res = JSON.parse(res.data);
-        if (res.code == 401) {
-          state = 'fail';
-          console.log('未登陆');
-          common.exitLogin();
-        }
-        uni.$emit('socketMessage', res);
-      } catch (e) {
-        console.log('接受到错误格式消息');
-      }
-    });
-  } else {
-    console.log('WebSocket正常状态无需重连');
-  }
-
-}
-
-function ping() {
-  console.log('主动ping给服务器');
-  uni.sendSocketMessage({
-    data: JSON.stringify({ type: 'ping' }) });
-
-  setTimeout(function () {
-    if (state == 'connect') {
-      ping();
-    }
-  }, _config.pingInterval * 1000);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 27:
+/***/ 20:
 /*!*************************************************!*\
   !*** /Users/zxx/Local/mychat社交/common/audio.js ***!
   \*************************************************/
@@ -8340,7 +9125,7 @@ function palys() {var type = arguments.length > 0 && arguments[0] !== undefined 
 
 /***/ }),
 
-/***/ 28:
+/***/ 21:
 /*!****************************************************!*\
   !*** /Users/zxx/Local/mychat社交/common/mysocket.js ***!
   \****************************************************/
@@ -8396,426 +9181,6 @@ module.exports = g;
 
 "use strict";
 
-
-/***/ }),
-
-/***/ 41:
-/*!********************************************************************!*\
-  !*** /Users/zxx/Local/mychat社交/pages/app?vue&type=script&lang=js& ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!.?vue&type=script&lang=js& */ 42);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_index_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ 42:
-/*!***********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!/Users/zxx/Local/mychat社交/pages/app?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _default = {
-  data: function data() {
-    return {
-      modalName: null,
-      base: {
-        avatar: this.$config.avatar,
-        CustomBar: this.CustomBar,
-        title: this.$config.title },
-
-      operate: {
-        id: 1 },
-
-      preview: {
-        list: [
-        "https://image.aishencn.com/2020/03/17/095817937_81909778-bbs.jpg"],
-
-        show: false,
-        index: 0 },
-
-      cosmos: {
-        scrollTop: 0,
-        propValue: true,
-        loadMore: false },
-
-      cosmosList: [],
-      menuList: [{
-        name: 'user',
-        label: '用户中心',
-        auth: true,
-        list: [{
-          label: '安全退出',
-          icon: 'cuIcon-exit',
-          auth: true,
-          url: '/pages/user/exit',
-          tag: '' }] }],
-
-
-      // 菜单列表
-      barList: [{
-        label: '社区',
-        icon: 'cuIcon-discover',
-        icons: 'cuIcon-discoverfill',
-        url: '/pages/cms/index' },
-      {
-        label: '资讯',
-        icon: 'my-information',
-        icons: 'my-information-fill',
-        url: '/pages/cms/index' },
-
-      {
-        label: '积分兑换',
-        icon: 'cuIcon-shop',
-        icons: 'cuIcon-shopfill',
-        url: '/pages/shop/index' },
-
-      {
-        label: '我的',
-        icon: 'my-user',
-        icons: 'my-user-fill',
-        url: '/pages/user/index' }],
-
-
-      userInfo: this.$common.userInfo(),
-      newMessageList: [],
-      messageCount: 0,
-      contacts: {
-        list: [{
-          uid: 1,
-          avatar: this.$config.logo,
-          nickname: '默毅',
-          state: '',
-          user: {
-            uid: 1,
-            avatar: this.$config.logo,
-            nickname: '默毅',
-            state: '' } }] },
-
-
-
-
-      tabScroll: 0,
-      currentTab: 0,
-
-      tabScrollItem: 0,
-      currentTabItem: 0,
-
-      //文字笑话
-      list: [],
-      //加载条数
-      pages: 0,
-      pages_all: false };
-
-  },
-  created: function created() {
-    console.log('userInfo', this.userInfo);
-  },
-  onLoad: function onLoad() {var _this = this;
-    this.cosmosGetList();
-    // 注册打开监听
-    uni.$on('socketOpen', function () {
-      console.log('socketOpen 服务器连接成功');
-    });
-
-    // 注册错误监听
-    uni.$on('socketError', function () {
-      console.log('socketError');
-      _this.$common.errorToShow('聊天服务器连接失败，部分功能不可用');
-    });
-
-    // 注册接受消息监听
-    uni.$on('socketMessage', function (res) {
-      console.log('socketMessage', res);
-      switch (res.type) {
-        case 'init':
-          break;
-        // 消息
-        case 'msg':
-          if (res.data.to && res.data.to == _this.userInfo.id) {
-            console.log('收到来自' + res.data.form + '消息', res.data);
-            switch (res.data.type) {
-              case 'text':
-                _this.$audio.palys();
-              case 'tips':
-                console.log('收到用发来的文本消息');
-                _this.$common.addNewMessageList(res.data.form, res.data.value, res.data.type);
-                _this.reMessgaeList();
-                _this.$common.addRecord(res.data.form, res.data);
-                break;
-              default:
-                console.log('非常规消息', res.data);
-                break;}
-
-          } else {
-            console.log('未知来源消息', res);
-            return;
-          }
-          break;
-        // 答复
-        case 'response':
-          _this.$common.updateRecordState(res.data);
-          break;
-        // 心跳
-        case 'ping':
-          uni.sendSocketMessage({
-            data: JSON.stringify({
-              type: 'ping' }) });
-
-
-          console.log('给服务器ping回去');
-          break;
-        default:
-          console.log('啥玩意数据，我咋不认识');
-          break;}
-
-    });
-
-
-
-    this.$socket.connect();
-    uni.getSystemInfo({
-      // 获取当前设备的宽高，文档有
-      success: function success(res) {
-        _this.windowHeight = res.windowHeight;
-        _this.windowWidth = res.windowWidth;
-      } });
-
-
-    // 获取好友列表
-    this.$api.friendsList({}, function (res) {
-      if (res.code != 1) {
-        _this.$common.errorToShow(res.msg);
-      } else {
-        res.data.forEach(function (ele, index) {
-          ele.user.avatar = _this.$common.CDN(ele.user.avatar);
-        });
-        _this.contacts.list = res.data;
-        res.data.forEach(function (ele, index) {
-          _this.$db.set('uid_' + ele.user.id, ele.user);
-        });
-      }
-    });
-    this.reMessgaeList();
-  },
-  methods: {
-    like: function like(index) {var _this2 = this;
-      this.$api.cosmosLike({
-        pid: this.cosmosList[index].id },
-      function (res) {
-        if (res.code) {
-          _this2.cosmosList[index].isLike = res.data;
-          if (res.data) {
-            _this2.cosmosList[index].likes++;
-          } else {
-            _this2.cosmosList[index].likes--;
-          }
-        }
-      });
-    },
-
-    // 宇宙操作
-    feedback: function feedback() {
-      this.$common.errorToShow('反馈id:' + this.operate.id);
-      return;
-      uni.navigateTo({
-        url: '/pages/app/feedback?id=' + this.operate.id });
-
-    },
-    cosmosMoreOperate: function cosmosMoreOperate(index) {
-      this.operate = this.cosmosList[index];
-      this.modalName = 'cosmosMore';
-    },
-    userOpen: function userOpen(index) {
-      this.$db.set('user', this.cosmosList[index]);
-      uni.navigateTo({
-        url: '/pages/app/user/index' });
-
-    },
-    cosmosOpen: function cosmosOpen(index) {
-
-      this.$db.set('cosmos', this.cosmosList[index]);
-
-      uni.navigateTo({
-        url: '/pages/app/cosmos/index?id=' + this.operate.id });
-
-    },
-
-    hideModal: function hideModal() {
-      this.modalName = null;
-    },
-
-    cosmosGetList: function cosmosGetList(id) {var _this3 = this;
-      this.$api.getCosmosList({
-        id: id },
-      function (res) {
-        if (res.code) {
-          _this3.cosmosList = [].concat(_toConsumableArray(_this3.cosmosList), _toConsumableArray(res.data));
-          _this3.cosmos.loadMore = true;
-        }
-      });
-    },
-    cosmosTrigger: function cosmosTrigger(i) {var _this4 = this;
-      switch (i) {
-        case 0:
-          // 松开刷新
-          break;
-        case 1:
-          // 触发刷新
-
-          this.$api.getCosmosList({}, function (res) {
-            if (res.code) {
-              _this4.cosmosList = res.data;
-              _this4.cosmos.propValue = !_this4.cosmos.propValue;
-            } else {
-              _this4.$common.errorToShow('空空如也');
-            }
-          });
-          break;
-        case 2:
-          var query = uni.createSelectorQuery().in(this);
-          query.select('#more-text').boundingClientRect(function (data) {
-            if (data.top < 1500) {
-              if (_this4.cosmos.loadMore) {
-                _this4.cosmos.loadMore = false;
-                _this4.cosmosGetList(_this4.cosmosList[_this4.cosmosList.length - 1].id);
-              }
-            }
-          }).exec();
-          // 未触发刷新
-          break;
-        case 3:
-          // 
-          // if (this.cosmos.loadMore) {
-          // 	this.cosmos.loadMore = false;
-          // 	this.cosmosGetList(this.cosmosList[this.cosmosList.length - 1].id);
-          // }
-          // this.cosmosList[this.cosmosList.length-1];
-
-          // console.log('开始预加载',this.cosmosList[this.cosmosList.length-1])
-          break;
-
-        default:
-          break;}
-
-    },
-    previews: function previews(list, index) {
-      this.preview.index = index;
-      this.preview.list = list;
-      this.preview.show = !this.preview.show;
-    },
-    qie: function qie() {
-      uni.reLaunch({
-        url: '/pages/user/login' });
-
-    },
-    clean: function clean() {var _this5 = this;
-      this.newMessageList.forEach(function (ele, index) {
-        _this5.$db.del('Record_' + ele.user.id);
-      });
-      this.newMessageList = [];
-      this.$db.del('NewMessageList');
-      this.$common.errorToShow('缓存清除成功');
-    },
-    // 刷新消息列表
-    reMessgaeList: function reMessgaeList() {var _this6 = this;
-      var count = 0;
-      this.newMessageList = this.$common.getNewMessageList();
-      this.newMessageList.forEach(function (ele, index) {
-        count += ele.tips.count;
-        if (count > 99) {
-          _this6.messageCount = count;
-          return;
-        }
-      });
-      this.messageCount = count;
-    },
-
-    // 初始化时间戳
-    timeToDate: function timeToDate(time) {
-      // console.log('time',time.length)
-      if (time < 9999999999) {
-        time = time * 1000;
-      }
-      // 1584445904420
-      // 1584433709
-      // console.log('time', time)
-      var timeDate = new Date(time);
-      var currentTime = new Date();
-      if (currentTime.getYear() == timeDate.getYear()) {
-        if (new Date(time).toDateString() === new Date().toDateString()) {
-          var hours = timeDate.getHours();
-          var minutes = timeDate.getMinutes();
-          if (hours < 10) {
-            hours = '0' + hours;
-          }
-          if (minutes < 10) {
-            minutes = '0' + minutes;
-          }
-          return hours + ':' + minutes;
-        } else if (new Date(time + 86400).toDateString() === new Date().toDateString()) {
-          return '昨天';
-        }
-        return timeDate.getMonth() + 1 + '月' + timeDate.getDate() + '日';
-      }
-      return timeDate.getYear() + '年' + (timeDate.getMonth() + 1) + '月';
-    },
-
-    // 打开对话
-    openChat: function openChat(id) {
-      this.$common.readNewMessageList(id);
-      uni.navigateTo({
-        url: 'chat?id=' + id });
-
-      this.reMessgaeList();
-    },
-    //点击tab menu
-    clickMenu: function clickMenu(e) {
-      var current = e.currentTarget.dataset.current; //获取当前tab的index
-      // 导航tab共2个，获取一个的宽度
-      var tabWidth = this.windowWidth / 4;
-      this.tabScroll = (current - 4) * tabWidth; //使点击的tab始终在居中位置
-      if (this.currentTab == current) {
-        return false;
-      } else {
-        this.currentTab = current;
-      }
-    },
-
-    //活动menu 内容
-    changeContent: function changeContent(e) {
-      var current = e.detail.current; // 获取当前内容所在index,文档有
-      var tabWidth = this.windowWidth / 2;
-      this.currentTab = current;
-      this.tabScroll = (current - 2) * tabWidth;
-    },
-
-    //活动menu 内容
-    changeContentItem: function changeContentItem(e) {
-      var current = e.detail.current; // 获取当前内容所在index,文档有
-      var tabWidth = this.windowWidth / 2;
-      this.currentTabItem = current;
-      this.tabScrollItem = (current - 2) * tabWidth;
-    } },
-
-
-  onShow: function onShow() {
-    console.log('onshow');
-    this.$socket.connect();
-    this.reMessgaeList();
-  },
-  onHide: function onHide() {
-    console.log('onHide');
-  } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -9713,7 +10078,7 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-26420200313001","_inBundle":false,"_integrity":"sha512-7dPuazTiDmUyRcw+WW+UlWGKH0eeCUB+p0P4pJVKEHjpdXnXgvDQCSdJk764NH99TfsUycnuxecP5oHckVa88g==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-26420200313001.tgz","_shasum":"a006e329e033cd412accfa635f8933dbb822a9c3","_spec":"@dcloudio/uni-stat@next","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"b1fdbafab5dd4673cff64188a5203d0c947e4f50","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-26420200313001"};
+module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-26720200326002","_inBundle":false,"_integrity":"sha512-SqBLYe4WLgejywVsjqhzDui4msF3UkmpYzYvs8B4AZuCLKfBZXh2pHO2BOfAGlI3sTok2ryMfM1nPKDxLUINOA==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-26720200326002.tgz","_shasum":"d2f51a9669a057883f3552f6a0ea4a2a8a48ea9c","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"7b266e20fce9373ef0387b40ce15109e25e14d1d","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-26720200326002"};
 
 /***/ }),
 
@@ -9725,7 +10090,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/app/user/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/feedback": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/cosmos/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/test/test": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/login": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/startup/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/chat": { "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarBackgroundColor": "#000000", "navigationBarTitleText": "ColorUi for UniApp", "navigationStyle": "custom", "navigationBarTextStyle": "white" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/app/indexs": { "navigationBarTitleText": "首页", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/list/chat": { "navigationBarTitleText": "对话列表", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/list/contacts": { "navigationBarTitleText": "联系人列表", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/cosmos/index": { "navigationBarTitleText": "宇宙", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/cosmos/push": { "navigationBarTitleText": "推送", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/cosmos/details": { "navigationBarTitleText": "详情", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/index": { "navigationBarTitleText": "用户详情", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/changepwd": { "navigationBarTitleText": "修改密码", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/changemobile": { "navigationBarTitleText": "修改手机", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/profile": { "navigationBarTitleText": "个人资料", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/my": { "navigationBarTitleText": "用户中心", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/cms/index": { "navigationBarTitleText": "单页", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/chat/index": { "navigationBarTitleText": "对话", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/feedback": { "navigationBarTitleText": "反馈意见", "backgroundColor": "#1c2024", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/cosmos/list": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/user/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/feedback": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/user/login": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/startup/index": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/app/chat": { "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarBackgroundColor": "#000000", "navigationBarTitleText": "ColorUi for UniApp", "navigationStyle": "custom", "navigationBarTextStyle": "white" } };exports.default = _default;
 
 /***/ }),
 
@@ -9738,240 +10103,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__083FA8C" };exports.default = _default;
-
-/***/ }),
-
-/***/ 89:
-/*!****************************************************************************!*\
-  !*** /Users/zxx/Local/mychat社交/pages/app/chat.js?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./chat.js?vue&type=script&lang=js& */ 90);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_chat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ 90:
-/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!/Users/zxx/Local/mychat社交/pages/app/chat.js?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  data: function data() {
-    return {
-      scrollAnimation: false, //滑动动画开关
-      scrollTop: 0, //竖向滚动条位置
-      scrollToView: '', //滚动到元素位置
-      InputBottom: 0,
-
-      record: [{
-        "id": 1583304081699,
-        "type": "text",
-        "to": 1074,
-        "from": 1081,
-        "value": "娃大王的娃",
-        "state": "Fail",
-        "time": 1583304081699 },
-      {
-        "id": 1583304081,
-        "to": "1081",
-        "form": 1074,
-        "type": "tips",
-        "value": "You have been blacklisted or deleted by the other party" }],
-
-      base: {
-        avatar: this.$config.avatar,
-        CustomBar: this.CustomBar },
-
-
-      chat: {
-        id: 1,
-        type: 'caht',
-        nickname: '默毅',
-        avatar: this.$config.logo,
-        inputText: '' },
-
-
-      inputText: '',
-      userInfo: this.$common.userInfo(),
-
-
-      tabScroll: 0,
-      currentTab: 3,
-
-      tabScrollItem: 0,
-      currentTabItem: 0,
-
-      //文字笑话
-      list: [],
-      //加载条数
-      pages: 0,
-      pages_all: false };
-
-  },
-  created: function created() {
-
-  },
-  onLoad: function onLoad(e) {var _this = this;
-    console.log('page.route	', getCurrentPages());
-    var CP = getCurrentPages();
-    console.log('cp', CP.length);
-
-    if (CP.length == 1 || CP[CP.length - 2].route == '/pages/app/index') {
-      console.log('并非当前页面');
-      uni.reLaunch({
-        url: '/pages/app/index' });
-
-
-    }
-    // let peges = getCurrentPages();
-    // // let page = ;
-    // console.log('pages[pages.length',getCurrentPages()[getCurrentPages().length]);
-
-    // let pages = getCurrentPages();
-    // let page = pages[pages.length - 1];
-
-    uni.getSystemInfo({
-      // 获取当前设备的宽高，文档有
-      success: function success(res) {
-        _this.windowHeight = res.windowHeight;
-        _this.windowWidth = res.windowWidth;
-      } });
-
-    if (e.id) {
-      //进入页面滚动到底部
-      this.$nextTick(function () {
-        this.scrollTop = 99999;
-      });
-
-      this.record = this.$common.getRecord(e.id);
-      this.chat = this.$common.getUserInfo(e.id);
-      if (e.id == this.userInfo.id) {
-        this.chat = this.userInfo;
-
-      } else {
-        this.chat = this.$common.getUserInfo(e.id);
-
-      }
-
-      // 注册接受消息监听
-      uni.$on('socketMessage', function (res) {
-        var data = res.data;
-        // console.log('socketMessage',res)
-        switch (res.type) {
-          case 'init':
-            break;
-          // 消息
-          case 'msg':
-            if (data.to == e.id || data.form == e.id) {
-              switch (data.type) {
-                case 'text':
-                  _this.record.push(data);
-                  _this.goViewId(data.id);
-                  break;
-                case 'tips':
-                  console.log('监听到提示消息');
-                  _this.record.push(data);
-                  _this.goViewId(data.id);
-                  break;
-                default:
-                  console.log('监听到未标记消息');
-                  break;}
-
-            } else {
-              switch (data.type) {
-                case 'text':
-                  var userInfo = _this.$common.getUserInfo(data.form);
-                  break;}
-
-            }
-            break;
-          // 答复
-          case 'response':
-            // 监听到答复
-            if (data.to == e.id || data.form == e.id) {
-              var record = _this.record;
-              for (var i = record.length - 1; i >= 0; i--) {
-                // 查找ID
-                if (record[i].id == data.id) {
-                  _this.record[i].state = data.value;
-                  i = 0;
-                }
-              }
-            }
-            break;
-          default:
-            console.log(res.type + '数据不作处理');
-            break;}
-
-      });
-    } else {
-      uni.redirectTo({
-        url: '/pages/app/index' });
-
-    }
-  },
-  methods: {
-    navigateBack: function navigateBack() {
-      uni.navigateBack({});
-
-
-    },
-    test1: function test1() {
-      //进入页面滚动到底部
-      this.$nextTick(function () {
-        this.scroc = 99999;
-      });
-    },
-    sendBtn: function sendBtn() {
-      var text = this.inputText;
-      console.log('this.chat.inputText', text);
-      if (text) {
-        this.send(text);
-        this.inputText = '';
-      }
-    },
-    send: function send(value) {var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'text';
-      var chat = {
-        id: new Date().getTime(),
-        type: type,
-        to: this.chat.id,
-        from: this.userInfo.id,
-        value: value,
-        state: 'Sending',
-        time: new Date().getTime() };
-
-      this.$common.addRecord(this.chat.id, chat);
-      this.$common.addNewMessageList(this.chat.id, chat.value);
-      this.record.push(chat);
-      this.goViewId(chat.id);
-      console.log('发送数据', chat);
-      uni.sendSocketMessage({
-        data: JSON.stringify(chat) });
-
-    },
-    goViewId: function goViewId(id) {var _this2 = this;
-      if (id) {
-        this.$nextTick(function () {
-          _this2.scrollToView = 'msg' + id;
-        });
-      }
-    } },
-
-  // 页面卸载的时候清除当前消息数量
-  onUnload: function onUnload() {
-    this.$common.readNewMessageList(this.chat.id);
-  } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 
