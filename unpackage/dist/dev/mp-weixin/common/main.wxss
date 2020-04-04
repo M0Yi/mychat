@@ -1350,7 +1350,7 @@ to {
 	margin: auto;
 	width: 260rpx;
 	height: 260rpx;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	border-radius: 10rpx;
 	box-shadow: 0 0 0rpx 2000rpx rgba(0, 0, 0, 0.5);
 	display: -webkit-box;
@@ -1380,7 +1380,7 @@ to {
 .cu-load.load-modal::after {
 	content: "";
 	position: absolute;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	border-radius: 50%;
 	width: 200rpx;
 	height: 200rpx;
@@ -1388,7 +1388,7 @@ to {
 	border-top: 6rpx solid rgba(0, 0, 0, 0.05);
 	border-right: 6rpx solid rgba(0, 0, 0, 0.05);
 	border-bottom: 6rpx solid rgba(0, 0, 0, 0.05);
-	border-left: 6rpx solid #f37b1d;
+	border-left: 6rpx solid #ffd250;
 	-webkit-animation: cuIcon-spin 1s infinite linear;
 	        animation: cuIcon-spin 1s infinite linear;
 	z-index: -1;
@@ -2701,7 +2701,7 @@ to {
 	margin-right: auto;
 	width: 680rpx;
 	max-width: 100%;
-	background-color: #f8f8f8;
+	/* background-color: #f8f8f8; */
 	border-radius: 10rpx;
 	overflow: hidden;
 }

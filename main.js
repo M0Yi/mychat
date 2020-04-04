@@ -48,6 +48,8 @@ Vue.component('preview',preview)
 
 
 
+import loadModal from './moyiui/components/load-modal.vue';
+Vue.component('loadModal',loadModal)
 
 import bottomMenu from './moyiui/components/bottom-menu.vue';
 Vue.component('bottomMenu',bottomMenu)
@@ -69,8 +71,8 @@ Vue.component('chat',chat)
 import contacts from './pages/list/contacts.vue'
 Vue.component('contacts',contacts)
 
-import my from './pages/user/my.vue'
-Vue.component('my',my)
+import center from './pages/user/center.vue'
+Vue.component('center',center)
 
 // import plugin from './pages/plugin/home.vue'
 // Vue.component('plugin',plugin)

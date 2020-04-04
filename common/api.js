@@ -140,6 +140,9 @@ export const cmsGetDetails = (data, success, complete) => post('cms/getDetails',
 // 反馈推送
 export const feedbackPush = (data, success, complete) => post('feedback/push', data, success, complete);
 
+// 微信登陆
+export const wechatLogin = (data, success, complete) => post('user/wechatLogin', data, success, complete);
+
 
 // 退出登陆
 export const logout = () => post('user/logout');

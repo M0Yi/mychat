@@ -1,19 +1,20 @@
 {
   "pages": [
+    "pages/chat/index",
+    "pages/user/login",
+    "pages/app/indexs",
+    "pages/list/chat",
+    "pages/list/contacts",
+    "pages/cosmos/index",
+    "pages/cosmos/push",
+    "pages/cosmos/details",
     "pages/user/index",
     "pages/user/changepwd",
     "pages/user/changemobile",
     "pages/user/profile",
-    "pages/user/my",
+    "pages/user/center",
     "pages/cms/index",
-    "pages/chat/index",
-    "pages/user/feedback",
-    "pages/app/cosmos/list",
-    "pages/app/user/index",
-    "pages/app/feedback",
-    "pages/user/login",
-    "pages/startup/index",
-    "pages/app/chat"
+    "pages/user/feedback"
   ],
   "subPackages": [],
   "window": {
@@ -29,12 +30,14 @@
     "my-message": "/colorui/components/my-message",
     "my-bar": "/colorui/components/my-bar",
     "preview": "/colorui/components/my-preview",
+    "load-modal": "/moyiui/components/load-modal",
     "bottom-menu": "/moyiui/components/bottom-menu",
     "more-modal": "/moyiui/components/more-modal",
     "preview-modal": "/moyiui/components/preview-modal",
     "cosmos": "/pages/cosmos/index",
     "chat": "/pages/list/chat",
     "contacts": "/pages/list/contacts",
-    "my": "/pages/user/my"
-  }
+    "center": "/pages/user/center"
+  },
+  "sitemapLocation": "sitemap56.json"
 }

@@ -1069,7 +1069,7 @@ button.cuIcon.lg {
 	margin: auto;
 	width: 260upx;
 	height: 260upx;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	border-radius: 10upx;
 	box-shadow: 0 0 0upx 2000upx rgba(0, 0, 0, 0.5);
 	display: flex;
@@ -1093,7 +1093,7 @@ button.cuIcon.lg {
 .cu-load.load-modal::after {
 	content: "";
 	position: absolute;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	border-radius: 50%;
 	width: 200upx;
 	height: 200upx;
@@ -1101,7 +1101,7 @@ button.cuIcon.lg {
 	border-top: 6upx solid rgba(0, 0, 0, 0.05);
 	border-right: 6upx solid rgba(0, 0, 0, 0.05);
 	border-bottom: 6upx solid rgba(0, 0, 0, 0.05);
-	border-left: 6upx solid #f37b1d;
+	border-left: 6upx solid #ffd250;
 	animation: cuIcon-spin 1s infinite linear;
 	z-index: -1;
 }
@@ -2458,7 +2458,7 @@ button.cuIcon.lg {
 	margin-right: auto;
 	width: 680upx;
 	max-width: 100%;
-	background-color: #f8f8f8;
+	/* background-color: #f8f8f8; */
 	border-radius: 10upx;
 	overflow: hidden;
 }
