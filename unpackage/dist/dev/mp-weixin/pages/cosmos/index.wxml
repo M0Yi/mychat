@@ -1,0 +1,99 @@
+<wxs module="cosmosMod">
+var startY = 0;
+var startX = 0;
+var top = 0;
+var code = 0;
+var mit = 0;
+function touchstart(event, ins) {
+	top = 0;
+	if (code == 0) {
+		mit = 0;
+		ins.callMethod('cosmosTrigger', 2);
+		var touch = event.touches[0] || event.changedTouches[0]
+		startY = touch.pageY
+		startX = touch.pageX
+	}
+}
+
+function end(newValue, oldValue, ownerInstance, instance) {
+	ownerInstance.selectComponent('#cosmos-refresh-container').setStyle({
+		'transform': 'translateY(0)',
+		'transition': 'ease 0.3s'
+	})
+	ownerInstance.selectComponent('#load-text').removeClass('anim-text-infinite')
+
+	ownerInstance.selectComponent('#load-text').setStyle({
+		'transform': 'scale(0)'
+	})
+
+	code = 0
+}
+
+function touchend(event, ins) {
+	if (code == 0) {
+		if (top < 60) {
+			ins.selectComponent('#cosmos-refresh-container').setStyle({
+				'transform': 'translateY(0)',
+				'transition': 'ease 0.3s'
+			})
+
+			ins.selectComponent('#load-text').setStyle({
+				'transform': 'scale(0)'
+			})
+		} else {
+			ins.selectComponent('#load-text').setStyle({
+				'transform': 'scale(1)'
+			})
+			ins.callMethod('cosmosTrigger', 1);
+			code = 1
+			ins.selectComponent('#cosmos-refresh-container').setStyle({
+				'transform': 'translateY(60px)',
+				'transition': 'ease 0.3s',
+				'padding-bottom': '60px',
+			})
+			ins.selectComponent('#load-text').addClass('anim-text-infinite')
+
+		}
+	} else {
+
+	}
+
+
+}
+
+function touchmove(event, ins) {
+	if (code == 0) {
+		var touch = event.touches[0] || event.changedTouches[0]
+		var pageY = touch.pageY
+		var pageX = touch.pageX
+		var vew = ins.selectComponent('#cosmos-refresh-container')
+		var dataset = vew.getDataset();
+		top = pageY - startY
+		var lr = pageX - startX
+		if (dataset.top == 0) {
+			if (top > 60) {
+				if (mit == 0) {
+					ins.callMethod('cosmosTrigger', 0);
+				}
+				mit = 1
+			}
+			vew.setStyle({
+				'transform': 'translateY(' + (top) + 'px)',
+				'padding-bottom': top + 'px',
+			})
+			ins.selectComponent('#load-text').setStyle({
+				'transform': 'scale(' + (top > 100 ? 1 : top / 100) + ')'
+			})
+		} else {
+			startY = pageY
+		}
+	}
+}
+module.exports = {
+	end: end,
+	touchend: touchend,
+	touchstart: touchstart,
+	touchmove: touchmove,
+}
+</wxs>
+<view class="moyi-bg-a"><more-modal vue-id="5db9b6c0-1" show="{{moreData.show}}" type="{{moreData.type}}" pid="{{moreData.id}}" bind:__l="__l"></more-modal><preview-modal vue-id="5db9b6c0-2" list="{{preview.list}}" show="{{preview.show}}" index="{{preview.index}}" bind:__l="__l"></preview-modal><view data-event-opts="{{[['tap',[['puls']]]]}}" class="moyi-abs-br-btn text-center round moyi-bg-c" bindtap="__e"><text class=" text-xl moyi-te-c">╋</text></view><view class="moyi-top-bar moyi-bg-b" style="{{('height:'+base.CustomBar+'px')}}"><view class=" moyi-te-b t" style="position:absolute;bottom:10rpx;"><text class="margin-left text-xl">最新</text><text data-event-opts="{{[['tap',[['e0',['$event']]]]]}}" class="margin-left  moyi-te-a" bindtap="__e">推荐</text></view></view><scroll-view class="scroll-view moyi-bg-a" change:prop="{{cosmosMod.end}}" prop="{{cosmos.propValue}}" data-top="{{cosmos.scrollTop}}" id="cosmos-refresh-container" scroll-y upper-threshold="50" bindtouchstart="{{cosmosMod.touchstart}}" bindtouchmove="{{cosmosMod.touchmove}}" bindtouchend="{{cosmosMod.touchend}}"><view class="load-text anim-text-lePeek text-center text-gray" style="{{('height:'+base.CustomBar+'px')}}" id="load-text"><block wx:for="{{base.title}}" wx:for-item="item" wx:for-index="index" wx:key="index"><text class="anim-text" style="{{('animation-delay:'+(200+index*100)+'ms;')}}">{{item}}</text></block></view><block wx:for="{{$root.l0}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['cosmosOpen',[index]]]]]}}" class="cosmos-chat text-grey" bindtap="__e"><view class="flex margin-tb padding-lr-xls"><view data-event-opts="{{[['tap',[['',['$event']],['userOpen',[index]]]]]}}" class="cu-avatar round lg" style="{{('background-image:url('+item.$orig.avatar+');')}}" catchtap="__e"><image src="{{item.$orig.frame}}" mode="widthFix"></image></view><view class="margin-auto padding-lr-sm"><text class="padding-right-sm ">{{item.$orig.nickname}}</text><text class="{{['text-bold',item.$orig.gender==0?'text-pink  cuIcon-female':'text-blue  cuIcon-male']}}"></text></view><view class="flex-sub margin-auto"></view><view class="flex cosmos-time"><view class="text-grey ">{{item.g0}}</view></view></view><view class="cu-item cosmos-text margin-bottom-sm">{{''+item.$orig.text+''}}</view><view data-event-opts="{{[['tap',[['',['$event']]]]]}}" class="padding-lr-xls" catchtap="__e"><block wx:if="{{item.$orig.images}}"><view class="{{['grid','margin-auto',item.$orig.images_arr.length==1?'':'col-3 grid-square']}}"><block wx:for="{{item.$orig.images_arr}}" wx:for-item="items" wx:for-index="indexs" wx:key="indexs"><view data-event-opts="{{[['tap',[['previews',['$0',indexs],[[['cosmosList','',index,'images_arr']]]]]]]}}" class="margin-tb-sm cosmos-image-item" bindtap="__e"><image class="cosmos-image-item-image" lazy-load src="{{items}}" mode="aspectFill"></image></view></block></view></block></view><view class="padding-lr-xls grid col-4 border-bottom text-center"><view><text class="cuIcon-attention text-xl"></text><text class="margin-left-ss">{{item.$orig.views>0?item.$orig.views:''}}</text></view><view><text class="cuIcon-comment text-xl"></text><text class="margin-left-ss">{{item.$orig.reviews>0?item.$orig.reviews:''}}</text></view><view data-event-opts="{{[['tap',[['',['$event']],['like',[index]]]]]}}" catchtap="__e"><text class="{{[item.$orig.isLike?'cuIcon-likefill text-red':'cuIcon-like']}}"></text><text class="margin-left-ss">{{item.$orig.likes>0?item.$orig.likes:''}}</text></view><view data-event-opts="{{[['tap',[['',['$event']]]]]}}" catchtap="__e"><text data-event-opts="{{[['tap',[['cosmosMoreOperate',[index]]]]]}}" class="cuIcon-more text-xl" bindtap="__e"></text></view></view><view class="cosmos-border"></view></view></block><view class="text-center text-white margin-auto" id="more-text">加载中...</view></scroll-view></view>

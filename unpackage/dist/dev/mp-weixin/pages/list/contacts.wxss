@@ -1,0 +1,12 @@
+.tips-msg {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 30%;
+  color: #8799A3;
+  display: grid;
+  text-align: center;
+}
+.tips-msg .icon {
+  font-size: 98rpx;
+}
+

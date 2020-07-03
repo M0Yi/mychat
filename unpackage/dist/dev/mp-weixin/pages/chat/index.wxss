@@ -1,0 +1,4 @@
+.cu-chat .cu-item {
+  padding: 10rpx 30rpx;
+}
+

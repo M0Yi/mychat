@@ -1,0 +1,1 @@
+.menu-main{bottom:0;width:100%;position:fixed;left:0;white-space:nowrap;box-sizing:border-box;overflow:hidden;z-index:999}.menu-main .my-tab-item{display:inline-block;width:25%;text-align:center}.menu-main .my-tab-item .icon{margin-top:10rpx}.menu-main .my-tab-item .text{font-size:20rpx}.menu-main .active{font-size:larger}

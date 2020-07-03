@@ -1,0 +1,1 @@
+<view><block wx:if="{{show}}"><view class="cu-load load-modal moyi-bg-b "><image src="{{image?image:base.logo}}" mode="aspectFit"></image><view class="moyi-te-a">{{text}}</view></view></block></view>

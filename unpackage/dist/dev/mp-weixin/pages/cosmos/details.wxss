@@ -1,0 +1,43 @@
+.border-bottom {
+  border-bottom: 1px solid #303030;
+}
+.cu-card {
+  height: 100vh;
+  -webkit-transform: scale(1) !important;
+          transform: scale(1) !important;
+}
+.none {
+  display: none;
+}
+.comment {
+  margin-bottom: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.comment .cu-avatar {
+  width: 10%;
+  margin: 0 20rpx;
+}
+.comment .content {
+  width: 90%;
+}
+.input {
+  background-color: #222;
+}
+.cosmos-scroll-view {
+  height: 90vh;
+}
+.my-screen-swiper {
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  left: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 100rpx;
+  z-index: 999;
+}
+

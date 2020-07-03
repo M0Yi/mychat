@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["moyiui/components/bottom-menu"],{"24a3":function(e,t,n){"use strict";n.r(t);var o=n("7f64"),a=n("bbd2");for(var c in a)"default"!==c&&function(e){n.d(t,e,(function(){return a[e]}))}(c);n("b29f");var r,u=n("f0c5"),l=Object(u["a"])(a["default"],o["b"],o["c"],!1,null,null,null,!1,o["a"],r);t["default"]=l.exports},"6a92":function(e,t,n){},"7f64":function(e,t,n){"use strict";var o,a=function(){var e=this,t=e.$createElement;e._self._c},c=[];n.d(t,"b",(function(){return a})),n.d(t,"c",(function(){return c})),n.d(t,"a",(function(){return o}))},b29f:function(e,t,n){"use strict";var o=n("6a92"),a=n.n(o);a.a},bbd2:function(e,t,n){"use strict";n.r(t);var o=n("c220"),a=n.n(o);for(var c in o)"default"!==c&&function(e){n.d(t,e,(function(){return o[e]}))}(c);t["default"]=a.a},c220:function(e,t,n){"use strict";(function(e){Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var n={props:{current:{type:Number|String,default:0}},data:function(){return{pages:getCurrentPages()}},created:function(){},methods:{click:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0,n="pages/cosmos/index";switch(t){case 1:n="pages/list/chat";break}var o=this.pages,a=o.length-1,c=-1,r=0;console.log("pages.length",o.length),console.log(o);for(var u=a;u>=0;u--)if(console.log("sss",u),console.log("当前循环route",o[u].route),n==o[u].route&&(c=r,u=-98),r++,-99==u)return;switch(console.log("basck",c),c){case-1:console.log("前往新页面"),e.navigateTo({url:"/"+n});break;case 0:console.log("无需处理");break;default:e.navigateBack({delta:r});break}console.log("i",t)}}};t.default=n}).call(this,n("543d")["default"])}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'moyiui/components/bottom-menu-create-component',
+    {
+        'moyiui/components/bottom-menu-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("24a3"))
+        })
+    },
+    [['moyiui/components/bottom-menu-create-component']]
+]);

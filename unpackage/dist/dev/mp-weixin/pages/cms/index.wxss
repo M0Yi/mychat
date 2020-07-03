@@ -1,0 +1,8 @@
+.cu-card {
+  height: 100vh;
+}
+.my-textarea {
+  min-height: 4.6em;
+  max-height: 9.2em;
+}
+
